@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Chatbot終極實戰-Prof. Mari Ostendorf演講雜記</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="." rel="canonical" />
+
+  <!-- Feed -->
+
+  <link href="./theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="./theme/css/code_blocks/github.css" rel="stylesheet">
+
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+    <link href="./mari-ostendorf-speech.html" rel="canonical" />
+
+        <meta name="description" content="On Prof. Mari Ostendorf's talk at NTU CSIE">
+
+        <meta name="author" content="Alexander Shieh">
+
+        <meta name="tags" content="speech">
+        <meta name="tags" content="nlp">
+        <meta name="tags" content="chatbot">
+        <meta name="tags" content="computer science">
+
+        <meta property="og:locale" content="" />
+    <meta property="og:site_name" content="Lipolysis" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Lipolysis" />
+    <meta property="og:description" content="View the blog." />
+    <meta property="og:url" content="." />
+      <meta name="og:image" content="./theme/images/post-bg.jpg">
+
+  <meta property="og:type" content="article">
+            <meta property="article:author" content="./author/alexander-shieh.html">
+  <meta property="og:url" content="./mari-ostendorf-speech.html">
+  <meta property="og:title" content="Chatbot終極實戰-Prof. Mari Ostendorf演講雜記">
+  <meta property="article:published_time" content="2018-07-17 00:00:00+08:00">
+            <meta property="og:description" content="On Prof. Mari Ostendorf's talk at NTU CSIE">
+
+            <meta property="og:image" content="./theme/images/post-bg.jpg">
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+
+              <li role="presentation"><a href="./pages/about.html">About</a></li>
+              <li role="presentation"><a href="./pages/projects.html">Projects</a></li>
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="." title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Chatbot終極實戰-Prof. Mari Ostendorf演講雜記</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="./author/alexander-shieh.html">Alexander shieh</a>
+            | <time datetime="二 17 七月 2018">二 17 七月 2018</time>
+        </span>
+        <!-- TODO : Modified check -->
+        
+            <div class="post-cover cover" style="background-image: url('./theme/images/post-bg.jpg')">
+        
+      </div>
+    </header>    
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <h1>Building a Socialbot</h1>
+<h2>Lessons Learned from 10M Conversations</h2>
+<h4>Mari Ostendorf @ NTU CSIE</h4>
+<p>現在做的題目跟Natural Language Understanding多多少少有點關係，這個講題是實做chatbot，講者Mari Ostendorf又是尤達大師請來的大咖，剛得到Speech界最高榮譽(
+註)，所以就特別來聽了一下，結果不少做DL+NLP的老師都有來XD！題目是介紹剛贏得Amazon Alexa Prize的Sounding Board chatbot。</p>
+<p>這個比賽基本上就是用Amazon Alexa這樣的載台做一個社交聊天機器人，然後以用戶跟評審的使用時間跟評分來決定誰贏。2017參加的隊伍除了這隊來自U Washington，還有Yoshua Bengio的MILA lab、CMU分別有Alan Black與Alexander Rudnicky指導的隊伍、Berkeley的John DeNero，可謂實力堅強！</p>
+<p>他們的網頁上面有演講投影片：<a href="https://sounding-board.github.io/">Sounding Board</a>，他們的團隊除了Ostendorf還有NLP新秀Yejin Choi跟Noah Smith，兩個看起來都超級猛。</p>
+<p>在跳進去那些technical的有的沒的之前，我覺得Ostendorf對於他們的目標做了一個很清楚的定義，這點真的值得學習：Chatbot的設計哲學。其實是一些簡單的intuition："Have something interesting to say" 與 "Show interest in what your partner says"。然後他很輕鬆地就說，看起來end-to-end在這個task起不了作用，所以我們還是用rule based的XD。</p>
+<p>所以要怎麼說有趣的話？就是建knowledge graph(用NER建的)、每天爬最新有趣的新聞跟笑話。要怎麼表達對於對方說的話有興趣？靠sentiment analysis、user modeling(他後來提到就是對使用者說的文字做bag of words LDA就可以發掘他們的「對話人格類型」)。</p>
+<p>實際上，他們的社交chatbot是由幾個層次組成的，前端是語音輸入ASR(automatic speech recognition)，輸出TTS(text-to-speech)。這兩個領域在近年有突飛猛進的進展，最有趣的例子就是Google CEO Sundar Pichai在最近的I/O上發表的Duplex，可以自動打電話訂位，就擁有目前最強的ASR跟TTS技術，讓bot可以聽得很準、講得很順。不過這部份Alexa已經做好了，所以重點是中間的NLP。</p>
+<p>參考<a href="https://ai.googleblog.com/2018/05/duplex-ai-system-for-natural-conversation.html">Google Duplex: An AI System for Accomplishing Real-World Tasks Over the Phone</a></p>
+<p>我後來發現有中文訪問：<a href="https://www.hksilicon.com/articles/1519334">亞馬遜 Alexa Prize 比賽冠軍團隊專訪：聊天機械人的突破與創新</a>，所以我就把圖附上了~
+<img alt="" src="https://s314.siliconimg.com/kb/content_images/2018/01/15/1519334/1515993093_782.png"></p>
+<p>中間三個主要的元素是Natural Language Understanding、Dialog Management跟Language Generation。NLU基本上是個相當困難的問題，所以他們可能將能偵測到使用者的話縮減為幾個固定的類型，像是：commands, questions, topics, reactions。DM的部份是由一個Master處理global的決策，比如說要聊什麼話題(甚至要考量有多少背景知識，不要聊到自己都不會的)，另一方面Miniskill負責local的決策，比如說是要講笑話還是測試使用者的反應之類的。最後Phrase Generation產生回答的句子，我覺得有趣的是他有Prosody Adjustment，像是調整語氣跟結構之類的，我猜是跟style transfer類似的功能，真好奇他是怎麼做的。</p>
+<p>後端就是knowledge graph的database，他有提到很多需要去除的case不然使用者會不開心，例如對小孩說聖誕節是一場最大的騙局XDDD！接著他提到很多evaluation困難的地方，因為想也知道大家打分數都亂打，或是講一堆沒用的noise，這樣的data實在很難參考，所以他們引入了許多心理學的概念去解決這些問題(比如說大家在心裡學學到的Peak–end rule，人們的經驗印象跟最受刺激跟結束時的感受有最大的關係，所以用來評價整段對話不一定正確)。總之他們後來就去做使用者的人格分析了，這樣的user modeling就讓選擇話題變成一個很直覺的retrieval問題，然後就可以rank話題了(?)。</p>
+<p>總之這整個chatbot的設計都很直覺，不過他們確實考量了非常多因素，才組出了可以聊這麼久的chatbot。當然眼尖的人可能會發現，這很像是在引誘回答，問你喜歡這個還是喜歡那個，盡可能討好使用者、按照劇本演出。所以我就問了個有點蠢的問題，就是如果對方是那種很愛自己講自己的人(像我QQ)，是否chatbot會變得幾乎無法理解他在講什麼，只能用knowledge graph裡面有的東西回答。Prof. Ostendorf回答是說不一定(我那時應該加上除了sentiment analysis之外，畢竟多多少少還是可以從用字中猜出情緒...吧)，理解使用者說的話有時非常trivial，其他時候則非常難，因為data太少了，不過目前愛講話的使用者比較少，所以可以敷衍過去(I doubt it...真的想聊天的人通常是想講很多幹話)。</p>
+<p>可見NLU還有很長的一段路要走，Google Duplex也只能在很有限的環境下達成任務，所以目前來說，讓chatbot過不了Turing test的方式就是...對著他講一堆關於自己的有的沒的再跟他聊你剛剛講的東西(?)。</p>
+<p>註：Mari Ostendorf是2018 IEEE James L. Flanagan Speech and Audio Processing Award得主，這個獎項之前的得獎人有莊炳湟院士、MIT CSAIL的前任director舒維都(Victor Zue)跟曾經說"Every time I fire a linguist, the performance of the speech recognizer goes up"的Frederick Jelinek都曾經是得主(修尤達大師數位語音處理概論(DSP)可以知道這些人做了什麼XD)。</p>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Chatbot終極實戰-Prof. Mari Ostendorf演講雜記&amp;url=./mari-ostendorf-speech.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=./mari-ostendorf-speech.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=./mari-ostendorf-speech.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="./tag/speech.html">speech</a><a href="./tag/nlp.html">nlp</a><a href="./tag/chatbot.html">chatbot</a><a href="./tag/computer-science.html">computer science</a>                </aside>
+
+                <div class="clear"></div>
+
+ 
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+  
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="./theme/js/script.js"></script>
+  
+</body>
+</html>
