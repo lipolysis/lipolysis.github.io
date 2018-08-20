@@ -151,8 +151,8 @@ VERY DEEP RNN/Attention LM + Task Specific Layers (Transfer Learning)
 <p>這些是Google Brain跟Tensor2Tensor Team發的，很潮。</p>
 <p>結局直接看最後一篇的abstract</p>
 <p>"Key to our method is the use of language models, trained on a massive amount of unlabled data, to score multiple choice questions posed by commonsense reasoning tests. On both Pronoun Disambiguation and Winograd Schema challenges, our models outperform previous state-of-the-art methods by a large margin ... We train an array of large RNN language models ... and show that diversity of training data plays an important role in test performance. Further analysis also shows that our system successfully discovers important features of the context that decide the correct answer, indicating a good grasp of commonsense knowledge." from Trinh and Le 2018.</p>
-<p>先介紹一下這篇paper做的task，是個經典的很難很難很難的dataset叫做Winograd Schema Challenge，題目大概長這樣(from http://commonsensereasoning.org/winograd.html)：
-I. The trophy would not fit in the brown suitcase because it was too big (small). What was too big (small)? Answer 0: the trophy Answer 1: the suitcase </p>
+<p>先介紹一下這篇paper做的task，是個經典的很難很難很難的dataset叫做Winograd Schema Challenge，題目大概長這樣(from http://commonsensereasoning.org/winograd.html)：</p>
+<p>I. The trophy would not fit in the brown suitcase because it was too big (small). What was too big (small)? Answer 0: the trophy Answer 1: the suitcase </p>
 <p>II. The town councilors refused to give the demonstrators a permit because they feared (advocated) violence. Who feared (advocated) violence? Answer 0: the town councilors Answer 1: the demonstrators</p>
 <p>這種題目類型叫做指代消解(Coreference Resolution)，不過是對演算法特別難的那種，因為需要commonsense XD</p>
 <p>這篇paper實在很簡單，就是train整句(full)跟後半句(partial)的Language Model，來決定答案要填什麼，</p>
