@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Recent Trends in NLP - From Word Embeddings to Large Language Models</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="https://lipolysis.github.io" rel="canonical" />
+
+  <!-- Feed -->
+
+  <link href="https://lipolysis.github.io/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="https://lipolysis.github.io/theme/css/code_blocks/github.css" rel="stylesheet">
+
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+    <link href="https://lipolysis.github.io/recent-trends-in-nlp-2018.html" rel="canonical" />
+
+        <meta name="description" content="Paper titles that I read">
+
+        <meta name="author" content="Alexander Shieh">
+
+        <meta name="tags" content="nlp">
+        <meta name="tags" content="nlu">
+        <meta name="tags" content="ai">
+        <meta name="tags" content="computer science">
+
+        <meta property="og:locale" content="" />
+    <meta property="og:site_name" content="Lipolysis" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Lipolysis" />
+    <meta property="og:description" content="View the blog." />
+    <meta property="og:url" content="https://lipolysis.github.io" />
+      <meta name="og:image" content="https://lipolysis.github.io/theme/images/post-bg.jpg">
+
+  <meta property="og:type" content="article">
+            <meta property="article:author" content="https://lipolysis.github.io/author/alexander-shieh.html">
+  <meta property="og:url" content="https://lipolysis.github.io/recent-trends-in-nlp-2018.html">
+  <meta property="og:title" content="Recent Trends in NLP - From Word Embeddings to Large Language Models">
+  <meta property="article:published_time" content="2018-08-10 00:00:00+08:00">
+            <meta property="og:description" content="Paper titles that I read">
+
+            <meta property="og:image" content="https://lipolysis.github.io/theme/images/post-bg.jpg">
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+
+              <li role="presentation"><a href="https://lipolysis.github.io/pages/about.html">About</a></li>
+              <li role="presentation"><a href="https://lipolysis.github.io/pages/projects.html">Projects</a></li>
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="https://lipolysis.github.io" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Recent Trends in NLP - From Word Embeddings to Large Language Models</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="https://lipolysis.github.io/author/alexander-shieh.html">Alexander shieh</a>
+            | <time datetime="五 10 八月 2018">五 10 八月 2018</time>
+        </span>
+        <!-- TODO : Modified check -->
+        
+            <div class="post-cover cover" style="background-image: url('https://lipolysis.github.io/theme/images/post-bg.jpg')">
+        
+      </div>
+    </header>    
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <h2>Recent Trends in NLP - From Word Embeddings to Large Language Models</h2>
+<p>這篇文主要是想要放一些最近看到的NLP paper連結，只是想不到好的方法介紹他們所以自己腦補了這段故事，希望寫得還算科普，讓人看得懂一點@@</p>
+<p>個人覺得故事本身還滿有趣的(主要是因為數學不好沒辦法用數學很有趣的角度介紹Orz)</p>
+<p>大家一定都聽過Mikolov做的word2vec吧，把一個詞轉成向量的方法(原文叫做<a href="https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf">Distributed Representations of Words and Phrases and their Compositionality</a>，現在已經被cite接近9000次了)。當時他提出了兩種作法，分別是CBOW跟Skip Gram，這裡就解釋Skip Gram好了。</p>
+<p>以下是腦補的部份：
+一個詞表達的內容其實跟這個詞怎麼用有關，而怎麼用就跟周遭出現的其他詞有關，所以Skip Gram想要捕捉的就是一個詞w1附近常出現哪些詞w2(i.e. P(w2|w1))。非常簡單地用兩個矩陣相乘做個softmax就可以算出在w1出現下wk出現的機率為何？其實這個作法很像是用NN做Matrix Factorization(傳統上其實就是tf-idf做SVD之類的)。
+(為什麼要解釋word2vec這麼久...這不是重點)</p>
+<p>重點是word2vec有一些缺點，我自己的感受主要是multisense跟multiword這兩個問題。原本word2vec是個global的representation，就是corpus裡面這個詞大概附近是誰。可是大部分的task想要做的事情是處理一個句子，那這個詞通常會因為句子的關係意思(也就是這次sample附近的人)有些改變，比如說經典的例子commercial bank跟river bank的差別。</p>
+<p>用這句話當個開場白：</p>
+<p>A polysemous word exhibits essentially only one sense per collocation. - Yarowsky. <a href="http://www.aclweb.org/anthology/H93-1052">One sense per collocation.</a> HLT 1993.</p>
+<p>接下來的paper多取自這篇<a href="http://ruder.io/word-embeddings-2017/">Word embeddings in 2017: Trends and future directions</a></p>
+<p>另一個問題是組合字，通常稱為MWE，也是類似的情況，因此原本的word2vec對句子來說會有一些noise。當然有很多人嘗試解決這個問題，比如說我就把一個詞拆開成組合詞跟非組合詞兩種狀況然後加權平均一下他們的embedding好了：</p>
+<p>Hashimoto and Tsuruoka. Adaptive Joint Learning of Compositional and Non-Compositional Phrase Embeddings. ACL 2016.</p>
+<p>或是想辦法用non-parametric Bayesian長出不同sense的embedding(其實就是Dirichlet Process，或稱為中國餐廳過程)
+<a href="https://github.com/njuhugn/Multi-sense-Embedding-Learning-using-Chinese-Restaurant-Process">這篇的Repo</a></p>
+<p>Li and Jurafsky. <a href="https://arxiv.org/pdf/1506.01070.pdf">Do Multi-Sense Embeddings Improve Natural Language Understanding.</a> EMNLP 2015.</p>
+<p>Neelakantan and Shankar et al. <a href="https://arxiv.org/abs/1504.06654">Efficient Non-parametric Estimation of Multiple Embeddings per Word in Vector Space.</a> EMNLP 2014. </p>
+<p>Iacobacci et al. <a href="http://www.aclweb.org/anthology/P16-1085">Embeddings for Word Sense Disambiguation: An Evaluation Study.</a> ACL 2016.</p>
+<p>不過總而言之，這些方法共同的缺點可能是：
+"We find that multi-sense embeddings do improve performance on some tasks (part-of-speech tagging, semantic relation identification, semantic relatedness) but not on others (named entity recognition, various forms of sentiment analysis)." from Li and Jurafsky 2015.</p>
+<p>那實際上對各種NLP task有幫助的是什麼呢？以下介紹針對句子中的詞的各種Language Model Based Representation(我自己取的名子XD)：</p>
+<p>主要的作法就是
+VERY DEEP RNN/Attention LM + Task Specific Layers (Transfer Learning) 
+然後跑了一堆task的benchmark，發現都會比之前的state of the art好上一截(of course，沒有比較好就不會publish啊XD)。</p>
+<p><a href="https://blog.openai.com/language-unsupervised/">Improving Language Understanding by Generative Pre-Training</a> (Open AI 2018) </p>
+<p><a href="https://allennlp.org/elmo">Deep contextualized word representations - ELMo</a> (Embeddings from Language Models) (Allen NLP 2018) </p>
+<p><a href="http://nlp.fast.ai/classification/2018/05/15/introducting-ulmfit.html">Universal Language Model Fine-tuning (ULMFiT) for Text Classification</a> (Fast AI 2018) 
+這篇的作者就是前面我參考的embedding集大成者</p>
+<p><a href="https://arxiv.org/abs/1706.03762">Attention Is All You Need</a>, 
+<a href="https://arxiv.org/abs/1801.10198">Generating Wikipedia by Summarizing Long Sequences</a>, 
+<a href="https://arxiv.org/abs/1806.02847">A Simple Method for Commonsense Reasoning</a> (Google Brain 2017-2018)</p>
+<p>這些是Google Brain跟Tensor2Tensor Team發的，很潮。</p>
+<p>結局直接看最後一篇的abstract</p>
+<p>"Key to our method is the use of language models, trained on a massive amount of unlabled data, to score multiple choice questions posed by commonsense reasoning tests. On both Pronoun Disambiguation and Winograd Schema challenges, our models outperform previous state-of-the-art methods by a large margin ... We train an array of large RNN language models ... and show that diversity of training data plays an important role in test performance. Further analysis also shows that our system successfully discovers important features of the context that decide the correct answer, indicating a good grasp of commonsense knowledge." from Trinh and Le 2018.</p>
+<p>先介紹一下這篇paper做的task，是個經典的很難很難很難的dataset叫做Winograd Schema Challenge，題目大概長這樣(from http://commonsensereasoning.org/winograd.html)：
+I. The trophy would not fit in the brown suitcase because it was too big (small). What was too big (small)? Answer 0: the trophy Answer 1: the suitcase </p>
+<p>II. The town councilors refused to give the demonstrators a permit because they feared (advocated) violence. Who feared (advocated) violence? Answer 0: the town councilors Answer 1: the demonstrators</p>
+<p>這種題目類型叫做指代消解(Coreference Resolution)，不過是對演算法特別難的那種，因為需要commonsense XD</p>
+<p>這篇paper實在很簡單，就是train整句(full)跟後半句(partial)的Language Model，來決定答案要填什麼，</p>
+<p>Score full = P (The trophy doesn’t fit in the suitcase because the suitcase is too big) </p>
+<p>Score partial = P (is too big| The trophy doesn’t fit in the suitcase because the suitcase)</p>
+<p>然後他把14個LM ensemble一波，就得到~63%的準確率(可是有沒有發現，這個dataset亂猜答對的機率是50%唷！代表其實現在做了很久還是沒有辦法有效達成commensense AI Orz)</p>
+<p>故事就先講到這，至於Open AI那篇用到的Transformer，等看完最新那篇再想辦法寫Orzzz</p>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Recent Trends in NLP - From Word Embeddings to Large Language Models&amp;url=https://lipolysis.github.io/recent-trends-in-nlp-2018.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://lipolysis.github.io/recent-trends-in-nlp-2018.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=https://lipolysis.github.io/recent-trends-in-nlp-2018.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="https://lipolysis.github.io/tag/nlp.html">nlp</a><a href="https://lipolysis.github.io/tag/nlu.html">nlu</a><a href="https://lipolysis.github.io/tag/ai.html">ai</a><a href="https://lipolysis.github.io/tag/computer-science.html">computer science</a>                </aside>
+
+                <div class="clear"></div>
+
+ 
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+  
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="https://lipolysis.github.io/theme/js/script.js"></script>
+  
+</body>
+</html>
