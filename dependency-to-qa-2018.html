@@ -188,8 +188,8 @@ http://universaldependencies.org/conll18/</p>
 <h3>從Open IE到Complex QA</h3>
 <p>我對QA的理解沒那麼深刻，不過剛好看到就放上來了</p>
 <p>Khot et al. <a href="https://arxiv.org/abs/1704.05572">Answering Complex Questions Using Open Information Extraction</a>. ACL 2017.</p>
-<p>傳統上來說，QA其實是個Retrieval問題，看到問題、看到選項，就去查答案看誰信心比較高嘛，不然就想辦法align問題跟答案看哪樣比較順(x)。根據這篇的說法，QA包括了Knowledge跟Inference這兩件事情，就是要有知識，又要讀得懂問題(跟選項)這樣～</p>
-<p>過去Knowledge通常是半人工建立的database(table)這樣，這篇把它改成用Open IE產生的tuple，就是很多的(arg1, rel, arg2)這樣，然後arg代表不同的entity，代表一個知識庫這樣。那Inference的部份，他們先retrieve前50名的tuple，把問題、tuple、答案之間的entity連接起來(根據某種word overlap計算邊的權重)然後用Integer Linear Programming(我記得這件事是NP-Complete的，不過他們就是喜歡這樣做)來找出最正確連接問題跟答案的support graph～</p>
+<p>傳統上來說，QA其實是個Retrieval問題，看到問題、看到選項，就去查答案看誰信心比較高嘛，不然就想辦法align問題跟答案看哪樣比較順(x)。根據這篇的說法，QA包括了Knowledge跟Inference這兩件事情，就是要有知識，又要讀得懂問題(跟選項)～</p>
+<p>過去Knowledge通常是半人工建立的database(table)，這篇把它改成用Open IE產生的tuple，就是很多的(arg1, rel, arg2)，然後arg代表不同的entity，代表一個知識庫。那Inference的部份，他們先retrieve前50名的tuple，把問題、tuple、答案之間的entity連接起來(根據某種word overlap計算邊的權重)然後用Integer Linear Programming(我記得這件事是NP-Complete的，不過他們就是喜歡這樣做)來找出最正確連接問題跟答案的support graph～</p>
 <p>好吧，聽起來很厲害，不過這篇paper的作者們身為QA的忠實愛好者，顯然不會滿足於此，所以推出了：<a href="http://data.allenai.org/arc/">AI2 Reasoning Challenge (ARC)</a>，而且標題還叫做...</p>
 <p><a href="http://ai2-website.s3.amazonaws.com/publications/AI2ReasoningChallenge2018.pdf">Think you have Solved Question Answering? Try ARC, the AI2 Reasoning Challenge</a></p>
 <p>讓我們來欣賞一下這個dataset的問題有多機車：</p>
