@@ -144,7 +144,7 @@ Recently, one thing that I’ve been devoting a lot of time to—together with m
 <p>Dependency Parser是一個很古老的問題，基本上有分成transition based跟graph based兩種，前者是一種O(n)建樹的過程，後者是把每一調邊都預測完之後跑directed MST。差別主要是前者比較難產生non-projective的邊(projective的意思是有點像括號匹配一樣，不會有交錯的狀況)。仔細講下去會變得有點講古，所以直接放上這兩種作法的state of the art：</p>
 <h4>Transition-Based</h4>
 <p>Google號稱全世界最準的Parser - ParseySaurus (SyntaxNet)</p>
-<p>https://ai.googleblog.com/2017/03/an-upgrade-to-syntaxnet-new-models-and.html</p>
+<p><a href="https://ai.googleblog.com/2017/03/an-upgrade-to-syntaxnet-new-models-and.html">An Upgrade to SyntaxNet, New Models and a Parsing Competition</a></p>
 <p>核心是個叫DRAGNN的東東，我猜取這個名字只是為了paper裡面這段：How to train a DRAGNN (c.f. <a href="https://en.wikipedia.org/wiki/How_to_Train_Your_Dragon_(film)">How to Train Your Dragon</a>)</p>
 <p>這種用NN的transition based parser最早其實是
 Chen and Manning. <a href="https://cs.stanford.edu/~danqi/papers/emnlp2014.pdf">A Fast and Accurate Dependency Parser using Neural Networks</a>. EMNLP 2014.</p>
