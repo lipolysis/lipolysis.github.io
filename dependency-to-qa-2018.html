@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>From dependency parsing, open information extraction to open domain QA systems</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="https://lipolysis.github.io" rel="canonical" />
+
+  <!-- Feed -->
+
+  <link href="https://lipolysis.github.io/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="https://lipolysis.github.io/theme/css/code_blocks/github.css" rel="stylesheet">
+
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+    <link href="https://lipolysis.github.io/dependency-to-qa-2018.html" rel="canonical" />
+
+        <meta name="description" content="More Paper titles that I read">
+
+        <meta name="author" content="Alexander Shieh">
+
+        <meta name="tags" content="nlp">
+        <meta name="tags" content="nlu">
+        <meta name="tags" content="dependency parsing">
+        <meta name="tags" content="open ie">
+        <meta name="tags" content="qa">
+        <meta name="tags" content="ai">
+        <meta name="tags" content="computer science">
+
+        <meta property="og:locale" content="" />
+    <meta property="og:site_name" content="Lipolysis" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Lipolysis" />
+    <meta property="og:description" content="View the blog." />
+    <meta property="og:url" content="https://lipolysis.github.io" />
+      <meta name="og:image" content="https://lipolysis.github.io/theme/images/post-bg.jpg">
+
+  <meta property="og:type" content="article">
+            <meta property="article:author" content="https://lipolysis.github.io/author/alexander-shieh.html">
+  <meta property="og:url" content="https://lipolysis.github.io/dependency-to-qa-2018.html">
+  <meta property="og:title" content="From dependency parsing, open information extraction to open domain QA systems">
+  <meta property="article:published_time" content="2018-08-23 00:00:00+08:00">
+            <meta property="og:description" content="More Paper titles that I read">
+
+            <meta property="og:image" content="https://lipolysis.github.io/theme/images/post-bg.jpg">
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+
+              <li role="presentation"><a href="https://lipolysis.github.io/pages/about.html">About</a></li>
+              <li role="presentation"><a href="https://lipolysis.github.io/pages/projects.html">Projects</a></li>
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="https://lipolysis.github.io" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">From dependency parsing, open information extraction to open domain QA systems</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="https://lipolysis.github.io/author/alexander-shieh.html">Alexander shieh</a>
+            | <time datetime="四 23 八月 2018">四 23 八月 2018</time>
+        </span>
+        <!-- TODO : Modified check -->
+        
+            <div class="post-cover cover" style="background-image: url('https://lipolysis.github.io/theme/images/post-bg.jpg')">
+        
+      </div>
+    </header>    
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <h2>From dependency parsing, open information extraction to open domain QA systems</h2>
+<p>這次要介紹的比較跟我做的東西有點關係@@</p>
+<p>主要是從Dependency Parser做Open Information Extraction，以及從Open Information Extraction做Complex QA。</p>
+<h3>什麼是Dependency Parsing？</h3>
+<p>簡單來說，就是把一個句子轉換成有文法標注的有向樹～</p>
+<p>Q: Parsing很重要嗎？現在不是流行end-to-end？
+A: 大概是很重要吧，Google Cloud已經有提供這個服務了：<a href="https://cloud.google.com/natural-language/docs/morphology">Morphology &amp; Dependency Trees</a></p>
+<p><img alt="" src="https://cloud.google.com/natural-language/docs/images/jfk-1961.png"></p>
+<p>另外請看下面這段：</p>
+<blockquote>
+<p>Joseph Reisinger wrote on his blog: “I get pitched regularly by startups doing ‘generic machine learning’ which is, in all honesty, a pretty ridiculous idea.
+Machine learning is not undifferentiated heavy lifting, it’s not commoditizable like EC2, and closer to design than coding.”5 From this perspective, it is people in linguistics, people in NLP, who are the designers. Recently at ACL conferences, there has been an over-focus on numbers, on beating the state of the art. Call it playing the Kaggle game. More of the field’s effort should go into problems, approaches, and architectures.
+Recently, one thing that I’ve been devoting a lot of time to—together with many other collaborators—is the development of Universal Dependencies. The goal is to develop a common syntactic dependency representation and POS and feature label sets that can be used with reasonable linguistic fidelity and human usability across all human languages. That’s just one example; there are many other design efforts underway in our field. One other current example is the idea of Abstract Meaning Representation."
+-- Christopher D. Manning, 2015 (from <a href="https://www.mitpressjournals.org/doi/abs/10.1162/COLI_a_00239">Computational Linguistics and Deep Learning</a>)</p>
+</blockquote>
+<p>所以這邊要介紹的就是為什麼要做dependency，以及他可以拿來做什麼～</p>
+<p>請參考 Jurafsky &amp; Martin. Speech and Language Processing. 第13章 <a href="https://web.stanford.edu/~jurafsky/slp3/13.pdf">Dependency Parsing</a></p>
+<p>其中一種標注方法叫做Universal Dependency，是設計來統一各種語言的通用標注方法：
+詳細請看<a href="http://universaldependencies.org/u/overview/syntax.html">UD Syntax</a></p>
+<p>想體驗看看可以用：<a href="http://corenlp.run/">CoreNLP (Stanford)</a></p>
+<p>中文可以用：<a href="http://ltp.ai/demo.html">LTP (HIT-SCIR)</a></p>
+<p>Dependency Parser是一個很古老的問題，基本上有分成transition based跟graph based兩種，前者是一種O(n)建樹的過程，後者是把每一調邊都預測完之後跑directed MST。差別主要是前者比較難產生non-projective的邊(projective的意思是有點像括號匹配一樣，不會有交錯的狀況)。仔細講下去會變得有點講古，所以直接放上這兩種作法的state of the art：</p>
+<h4>Transition-Based</h4>
+<p>Google號稱全世界最準的Parser - ParseySaurus (SyntaxNet)</p>
+<p>https://ai.googleblog.com/2017/03/an-upgrade-to-syntaxnet-new-models-and.html</p>
+<p>核心是個叫DRAGNN的東東，我猜取這個名字只是為了paper裡面這段：How to train a DRAGNN (c.f. <a href="https://en.wikipedia.org/wiki/How_to_Train_Your_Dragon_(film)">How to Train Your Dragon</a>)</p>
+<p>這種用NN的transition based parser最早其實是
+Chen and Manning. <a href="https://cs.stanford.edu/~danqi/papers/emnlp2014.pdf">A Fast and Accurate Dependency Parser using Neural Networks</a>. EMNLP 2014.</p>
+<h4>Graph-Based</h4>
+<p>Dozat and Manning. <a href="https://aclanthology.info/papers/P18-2077/p18-2077">Simpler but More Accurate Semantic Dependency Parsing</a>. ACL 2018.</p>
+<p>基本上是直接用Bi-LSTM做～</p>
+<p>(話說是不是最近的paper很喜歡用Simple but xxx當作標題@@)</p>
+<p>如果有人對dependency的來龍去脈很有興趣的話，可以看看一些背景知識的slides (不過我猜是沒人有興趣QQ)：</p>
+<p>http://stp.lingfil.uu.se/~sara/kurser/5LN455-2014/lectures/5LN455-F7.pdf</p>
+<p>http://www.cs.columbia.edu/~rasooli/papers/candidacy2016.pdf</p>
+<p>當然也有比較奇特的</p>
+<p>Strubell et al. <a href="https://arxiv.org/pdf/1705.00403.pdf">Dependency Parsing with Dilated Iterated Graph CNNs</a> EMNLP Workshop 2017.</p>
+<p><a href="https://arxiv.org/pdf/1701.03163.pdf">Parsing Universal Dependencies without training</a>. EACL 2017.</p>
+<p>每年CoNLL都有個比賽是看大家的parser有多準：
+http://universaldependencies.org/conll18/</p>
+<p>目前中文的state of the art (2018 CoNLL shared task zh_gsd)大概是：</p>
+<p>UAS HIT-SCIR 80.59 Stanford 74.38 (這是不含label的F1 score)</p>
+<p>LAS HIT-SCIR 76.77 Stanford 71.04 (這是含label的F1 score)</p>
+<p>HIT的作法是用了Stanford 2017年的model加上Elmo(見上一篇文)，不過其實Google 2017就可以做到這麼準了@@</p>
+<h3>什麼是Open Information Extraction？</h3>
+<p>傳統的Ontology Learning是給一種關係，然後從文字中找出有這個關係的pair。那如果不事先設定這個關係呢？Open IE想做的事情就是自動生成(arg1, rel, arg2)這樣的tuple，然後把arg自動連起來，就變成全自動的Ontology了！</p>
+<p>其實這個東西跟dependency中的(nsubj, root, obj)有87%像，所以現在很多Open IE都用dependency tree作為input再吐出這些tuple。</p>
+<p>剛好有名的Allen AI (AI2)的CEO就是做第一個Open IE系統的人，可以到他們的網站上體驗一下<a href="http://openie.allenai.org/">Open IE (Allen AI)</a>。後面會提到他們拿Open IE來做各種QA～</p>
+<p>最近剛出了一個review，關於Open IE的歷史：<a href="https://arxiv.org/pdf/1806.05599.pdf">A Survey on Open Information Extraction</a></p>
+<p>我最早其實看到的是這篇，把dependency一路串到QA的：</p>
+<p>Poon and Domingos. <a href="https://dl.acm.org/citation.cfm?id=1858712">Unsupervised ontology induction from text</a>. ACL 2010.</p>
+<p>目前常用的Open IE package有：</p>
+<h4><a href="https://stanfordnlp.github.io/CoreNLP/openie.html">Stanford Open IE</a></h4>
+<p>他們的作法是用一個小classifier決定在dependency tree上面要繼續recurse還是分出新的clause，然後對於每個clause再用一些rule決定要不要刪除一些詞跟用一些pattern產生最後的tuple，有點小複雜。</p>
+<p>Angeli et al<a href="https://nlp.stanford.edu/pubs/2015angeli-openie.pdf">Leveraging Linguistic Structure For Open Domain Information Extraction</a></p>
+<h4><a href="https://github.com/dair-iitd/OpenIE-standalone">Open IE 5.0</a></h4>
+<p>這是UW跟IIT Delhi一起做的，所以AI2他們也有用～</p>
+<p>對Open IE系統常用的benchmark是：
+<a href="https://github.com/gabrielStanovsky/oie-benchmark/tree/python3">Creating a Large Benchmark for Open Information Extraction</a>. EMNLP 2016.</p>
+<p>除了前面講的semi rule-based方法外最近有一堆bi-LSTM seq2seq的作法(就是直接餵整句話然後吐出tuple)，整個就有點暴力(不過想想 Vinyals et al. <a href="https://papers.nips.cc/paper/5635-grammar-as-a-foreign-language.pdf">Grammar as a foreign language</a>. NIPS 2015. 這篇，就不會覺得這很扯了((誤，這篇是很早就直接用Seq2Seq學parse tree的作品 )</p>
+<p>Sun et al. <a href="https://dl.acm.org/citation.cfm?id=3159712&amp;dl=ACM&amp;coll=DL">Logician: A Unified End-to-End Neural Approach for Open-Domain Information Extraction</a>. WSDM 2018.
+這是Baidu Research的方法，是個小技巧有點多的Seq2Seq(裡面也有用到dependency作為attention的一部分)，他們有提供一套新的dataset叫做：<a href="https://ai.baidu.com/broad/introduction?dataset=kg">SAOKE</a>。</p>
+<p>Cui et al. <a href="https://arxiv.org/abs/1805.04270">Neural Open Information Extraction</a> 2018.
+這篇是MSRA的，是類似的Seq2Seq方法，有跟上面的2016 benchmark比較。</p>
+<p>ZORE: A Syntax-based System for Chinese Open Relation Extraction. EMNLP 2016.</p>
+<h3>從Open IE到Complex QA</h3>
+<p>我對QA的理解沒那麼深刻，不過剛好看到就放上來了</p>
+<p>Khot et al. <a href="https://arxiv.org/abs/1704.05572">Answering Complex Questions Using Open Information Extraction</a>. ACL 2017.</p>
+<p>傳統上來說，QA其實是個Retrieval問題，看到問題、看到選項，就去查答案看誰信心比較高嘛，不然就想辦法align問題跟答案看哪樣比較順(x)。根據這篇的說法，QA包括了Knowledge跟Inference這兩件事情，就是要有知識，又要讀得懂問題(跟選項)這樣～</p>
+<p>過去Knowledge通常是半人工建立的database(table)這樣，這篇把它改成用Open IE產生的tuple，就是很多的(arg1, rel, arg2)這樣，然後arg代表不同的entity，代表一個知識庫這樣。那Inference的部份，他們先retrieve前50名的tuple，把問題、tuple、答案之間的entity連接起來(根據某種word overlap計算邊的權重)然後用Integer Linear Programming(我記得這件事是NP-Complete的，不過他們就是喜歡這樣做)來找出最正確連接問題跟答案的support graph～</p>
+<p>好吧，聽起來很厲害，不過這篇paper的作者們身為QA的忠實愛好者，顯然不會滿足於此，所以推出了：<a href="http://data.allenai.org/arc/">AI2 Reasoning Challenge (ARC)</a>，而且標題還叫做...</p>
+<p><a href="http://ai2-website.s3.amazonaws.com/publications/AI2ReasoningChallenge2018.pdf">Think you have Solved Question Answering? Try ARC, the AI2 Reasoning Challenge</a></p>
+<p>讓我們來欣賞一下這個dataset的問題有多機車：</p>
+<blockquote>
+<p>Compared to the Sun, a red star most likely has a greater 
+(A) volume. (B) rate of rotation. (C) surface temperature. (D) number of orbiting planets </p>
+<p>If a red flowered plant (RR) is crossed with a white flowered plant (rr), what color will the offspring be? 
+(A) 100% pink (B) 100% red (C) 50% white, 50% red (D) 100% white</p>
+</blockquote>
+<p>有沒有覺得國中地科、生物沒有白學呢XDDD</p>
+<p>所以顯然上述的Open IE加上ILP沒辦法解決這樣的QA，所以它的performance比亂猜(25%)的還要差... 目前SOTA是31%，革命尚未成功，大家可以趕快跳坑XD</p>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=From dependency parsing, open information extraction to open domain QA systems&amp;url=https://lipolysis.github.io/dependency-to-qa-2018.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://lipolysis.github.io/dependency-to-qa-2018.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=https://lipolysis.github.io/dependency-to-qa-2018.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="https://lipolysis.github.io/tag/nlp.html">nlp</a><a href="https://lipolysis.github.io/tag/nlu.html">nlu</a><a href="https://lipolysis.github.io/tag/dependency-parsing.html">dependency parsing</a><a href="https://lipolysis.github.io/tag/open-ie.html">open ie</a><a href="https://lipolysis.github.io/tag/qa.html">qa</a><a href="https://lipolysis.github.io/tag/ai.html">ai</a><a href="https://lipolysis.github.io/tag/computer-science.html">computer science</a>                </aside>
+
+                <div class="clear"></div>
+
+ 
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+  
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="https://lipolysis.github.io/theme/js/script.js"></script>
+  
+</body>
+</html>

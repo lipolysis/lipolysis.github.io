@@ -121,12 +121,14 @@
 <p>這篇文主要是想要放一些最近看到的NLP paper連結，只是想不到好的方法介紹他們所以自己腦補了這段故事，希望寫得還算科普，讓人看得懂一點@@</p>
 <p>個人覺得故事本身還滿有趣的(主要是因為數學不好沒辦法用數學很有趣的角度介紹Orz)</p>
 <p>大家一定都聽過Mikolov做的word2vec吧，把一個詞轉成向量的方法(原文叫做<a href="https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf">Distributed Representations of Words and Phrases and their Compositionality</a>，現在已經被cite接近9000次了)。當時他提出了兩種作法，分別是CBOW跟Skip Gram，這裡就解釋Skip Gram好了。</p>
-<p>以下是腦補的部份：
-一個詞表達的內容其實跟這個詞怎麼用有關，而怎麼用就跟周遭出現的其他詞有關，所以Skip Gram想要捕捉的就是一個詞w1附近常出現哪些詞w2(i.e. P(w2|w1))。非常簡單地用兩個矩陣相乘做個softmax就可以算出在w1出現下wk出現的機率為何？其實這個作法很像是用NN做Matrix Factorization(傳統上其實就是tf-idf做SVD之類的)。
+<p>以下是腦補的部份：</p>
+<p>一個詞表達的內容其實跟這個詞怎麼用有關，而怎麼用就跟周遭出現的其他詞有關，所以Skip Gram想要捕捉的就是一個詞w1附近常出現哪些詞w2(i.e. P(w2|w1))。非常簡單地用兩個矩陣相乘做個softmax就可以算出在w1出現下wk出現的機率為何？其實這個作法很像是用NN做Matrix Factorization(傳統上其實就是tf-idf做SVD之類的)。
 (為什麼要解釋word2vec這麼久...這不是重點)</p>
 <p>重點是word2vec有一些缺點，我自己的感受主要是multisense跟multiword這兩個問題。原本word2vec是個global的representation，就是corpus裡面這個詞大概附近是誰。可是大部分的task想要做的事情是處理一個句子，那這個詞通常會因為句子的關係意思(也就是這次sample附近的人)有些改變，比如說經典的例子commercial bank跟river bank的差別。</p>
 <p>用這句話當個開場白：</p>
+<blockquote>
 <p>A polysemous word exhibits essentially only one sense per collocation. - Yarowsky. <a href="http://www.aclweb.org/anthology/H93-1052">One sense per collocation.</a> HLT 1993.</p>
+</blockquote>
 <p>接下來的paper多取自這篇<a href="http://ruder.io/word-embeddings-2017/">Word embeddings in 2017: Trends and future directions</a></p>
 <p>另一個問題是組合字，通常稱為MWE，也是類似的情況，因此原本的word2vec對句子來說會有一些noise。當然有很多人嘗試解決這個問題，比如說我就把一個詞拆開成組合詞跟非組合詞兩種狀況然後加權平均一下他們的embedding好了：</p>
 <p>Hashimoto and Tsuruoka. Adaptive Joint Learning of Compositional and Non-Compositional Phrase Embeddings. ACL 2016.</p>
@@ -135,11 +137,21 @@
 <p>Li and Jurafsky. <a href="https://arxiv.org/pdf/1506.01070.pdf">Do Multi-Sense Embeddings Improve Natural Language Understanding.</a> EMNLP 2015.</p>
 <p>Neelakantan and Shankar et al. <a href="https://arxiv.org/abs/1504.06654">Efficient Non-parametric Estimation of Multiple Embeddings per Word in Vector Space.</a> EMNLP 2014. </p>
 <p>Iacobacci et al. <a href="http://www.aclweb.org/anthology/P16-1085">Embeddings for Word Sense Disambiguation: An Evaluation Study.</a> ACL 2016.</p>
-<p>不過總而言之，這些方法共同的缺點可能是：
-"We find that multi-sense embeddings do improve performance on some tasks (part-of-speech tagging, semantic relation identification, semantic relatedness) but not on others (named entity recognition, various forms of sentiment analysis)." from Li and Jurafsky 2015.</p>
+<p>不過總而言之，這些方法共同的缺點可能是：</p>
+<blockquote>
+<p>"We find that multi-sense embeddings do improve performance on some tasks (part-of-speech tagging, semantic relation identification, semantic relatedness) but not on others (named entity recognition, various forms of sentiment analysis)." from Li and Jurafsky 2015.</p>
+</blockquote>
 <p>那實際上對各種NLP task有幫助的是什麼呢？以下介紹針對句子中的詞的各種Language Model Based Representation(我自己取的名子XD)：</p>
+<p><strong>補充一下</strong>：這邊我覺得銜接得太突兀了，所以提供一個自己的意見。通常在看一個句子的時候，其實就算把文字打亂還是多多少少可以猜出它的意思，同樣一個詞的意思也被這bag of words決定了，所以到底怎樣能夠最好(最有效率)地表達sentence (given bag/sequence of words) 跟表達word (given bag/sequence of words/collocations) 是一個很重要的議題。</p>
+<p>比如說text classification這個很古老的問題，就有人提出更簡單而且比CNN/RNN performance更好的簡單sentence embedding：</p>
+<p>Arora et al. <a href="https://openreview.net/forum?id=SyK00v5xx">A Simple but Tough-to-Beat Baseline for Sentence Embeddings</a>. ICLR 2017.</p>
+<p>有興趣的可以看Princeton NLP blog上面的解釋：</p>
+<p>http://www.offconvex.org/2018/06/17/textembeddings/</p>
+<p>http://www.offconvex.org/2018/06/25/textembeddings/</p>
+<p>Shen et al. <a href="https://aclanthology.info/papers/P18-1041/p18-1041">Baseline Needs More Love: On Simple Word-Embedding-Based Models and Associated Pooling Mechanisms</a>. ACL 2018.</p>
+<p>如果大家對text classification benchmark有興趣可以自己跑跑看，data在 http://xzh.me/ 。</p>
 <p>主要的作法就是
-VERY DEEP RNN/Attention LM + Task Specific Layers (Transfer Learning) 
+VERY DEEP RNN/Attention LM + Task Specific Layers (直接Transfer Learning) 
 然後跑了一堆task的benchmark，發現都會比之前的state of the art好上一截(of course，沒有比較好就不會publish啊XD)。</p>
 <p><a href="https://blog.openai.com/language-unsupervised/">Improving Language Understanding by Generative Pre-Training</a> (Open AI 2018) </p>
 <p><a href="https://allennlp.org/elmo">Deep contextualized word representations - ELMo</a> (Embeddings from Language Models) (Allen NLP 2018) </p>
@@ -150,7 +162,9 @@ VERY DEEP RNN/Attention LM + Task Specific Layers (Transfer Learning)
 <a href="https://arxiv.org/abs/1806.02847">A Simple Method for Commonsense Reasoning</a> (Google Brain 2017-2018)</p>
 <p>這些是Google Brain跟Tensor2Tensor Team發的，很潮。</p>
 <p>結局直接看最後一篇的abstract</p>
+<blockquote>
 <p>"Key to our method is the use of language models, trained on a massive amount of unlabled data, to score multiple choice questions posed by commonsense reasoning tests. On both Pronoun Disambiguation and Winograd Schema challenges, our models outperform previous state-of-the-art methods by a large margin ... We train an array of large RNN language models ... and show that diversity of training data plays an important role in test performance. Further analysis also shows that our system successfully discovers important features of the context that decide the correct answer, indicating a good grasp of commonsense knowledge." from Trinh and Le 2018.</p>
+</blockquote>
 <p>先介紹一下這篇paper做的task，是個經典的很難很難很難的dataset叫做Winograd Schema Challenge，題目大概長這樣(from http://commonsensereasoning.org/winograd.html)：</p>
 <p>I. The trophy would not fit in the brown suitcase because it was too big (small). What was too big (small)? Answer 0: the trophy Answer 1: the suitcase </p>
 <p>II. The town councilors refused to give the demonstrators a permit because they feared (advocated) violence. Who feared (advocated) violence? Answer 0: the town councilors Answer 1: the demonstrators</p>
