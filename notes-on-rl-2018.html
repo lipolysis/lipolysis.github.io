@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Some Notes on Reinforcement Learning</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="https://lipolysis.github.io" rel="canonical" />
+
+  <!-- Feed -->
+
+  <link href="https://lipolysis.github.io/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="https://lipolysis.github.io/theme/css/code_blocks/github.css" rel="stylesheet">
+
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+    <link href="https://lipolysis.github.io/notes-on-rl-2018.html" rel="canonical" />
+
+        <meta name="description" content="Just some notes">
+
+        <meta name="author" content="Alexander Shieh">
+
+        <meta name="tags" content="reinforcement learning">
+        <meta name="tags" content="ai">
+        <meta name="tags" content="computer science">
+
+        <meta property="og:locale" content="" />
+    <meta property="og:site_name" content="Lipolysis" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Lipolysis" />
+    <meta property="og:description" content="View the blog." />
+    <meta property="og:url" content="https://lipolysis.github.io" />
+      <meta name="og:image" content="https://lipolysis.github.io/theme/images/post-bg.jpg">
+
+  <meta property="og:type" content="article">
+            <meta property="article:author" content="https://lipolysis.github.io/author/alexander-shieh.html">
+  <meta property="og:url" content="https://lipolysis.github.io/notes-on-rl-2018.html">
+  <meta property="og:title" content="Some Notes on Reinforcement Learning">
+  <meta property="article:published_time" content="2018-10-31 00:00:00+08:00">
+            <meta property="og:description" content="Just some notes">
+
+            <meta property="og:image" content="https://lipolysis.github.io/theme/images/post-bg.jpg">
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+
+              <li role="presentation"><a href="https://lipolysis.github.io/pages/about.html">About</a></li>
+              <li role="presentation"><a href="https://lipolysis.github.io/pages/projects.html">Projects</a></li>
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="https://lipolysis.github.io" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Some Notes on Reinforcement Learning</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="https://lipolysis.github.io/author/alexander-shieh.html">Alexander shieh</a>
+            | <time datetime="三 31 十月 2018">三 31 十月 2018</time>
+        </span>
+        <!-- TODO : Modified check -->
+        
+            <div class="post-cover cover" style="background-image: url('https://lipolysis.github.io/theme/images/post-bg.jpg')">
+        
+      </div>
+    </header>    
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <h3>DRL Lectures</h3>
+<p>http://speech.ee.ntu.edu.tw/~tlkagk/courses_MLDS18.html</p>
+<p>看完這系列的感想就是：GAN跟RL真的是殊途同歸啊~</p>
+<h3>Actor Critic (Advantage Actor-Critic and Pathwise Derivative Policy Gradient)</h3>
+<p>Actor Critic其實是GAN！原本Policy Gradient要用整個trajectory的reward去決定action gradient的權重，現在用Value function + 當前reward代替，就不用on-policy地把整個trajectory試完再train(?)。所以，如果是把Actor(用Policy Gradient決定的network)跟Critic(計算目前這個Actor的Value function或Q function)串起來的話，就跟GAN 87%像，先讓Actor玩一玩，然後Critic學Value function(Discriminator)，Actor再用Critic的Value function用Policy Gradient增強自己(Generator)。</p>
+<h4>Intrinsic Curiosity Module(ICM)</h4>
+<p>記得之前有想過要怎麼做RL without reward，很直覺的想法就是，如果我可以預測做某個action之後的state會變得如何，似乎就是學會了(這件事情很早就有人做過XD)。
+ICM為了解決sparse reward所以想了一個辦法增加人工reward，作法是預測做現在這個action之後下一個state會變成怎樣，把這個預測的下個state跟真實的下個state比較，差距越大越鼓勵去嘗試(可能表示還不太懂需要試試這樣)。問題是有可能兩個state差了一些枝微末節的東西就有很多reward，所以用另一個network預測given現在的state跟真實的下個state，造成這個轉換的action是不是現在要採取的action，用這樣的方式去extract真的可以預測動作造成轉換的feature。</p>
+<p>關於ICM詳細是怎麼做的：</p>
+<p>Curiosity-driven Exploration by Self-supervised Prediction
+* https://pathak22.github.io/noreward-rl/</p>
+<p>其實這篇心得放著很久，是因為看到這個才又想起來：
+Large-Scale Study of Curiosity-Driven Learning</p>
+<ul>
+<li>https://pathak22.github.io/large-scale-curiosity/</li>
+<li>https://blog.openai.com/reinforcement-learning-with-prediction-based-rewards/</li>
+</ul>
+<h4>Inverse Reinforcement Learning (IRL)</h4>
+<p>IRL也是一種GAN！當沒有reward function卻只有一些expert的經驗當作gold standards時，可以設計一個reward model讓expert trajectory的reward大於actor trajectory的reward(這就是Discriminator)，然後讓actor依照這個reward model去學maximize這個model的policy(就是Generator)。</p>
+<p>Some Links
+<em> https://github.com/openai/baselines
+</em> https://github.com/google/dopamine
+* https://github.com/dbobrenko/reinforcement-learning-notes</p>
+<h3>Pytorch Tutorials</h3>
+<ul>
+<li>https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html</li>
+<li>https://pytorch.org/tutorials/beginner/saving_loading_models.html</li>
+</ul>
+<p>這兩篇是基本的PyTorch功能，值得一行一行學起來，也有一個簡單的中文介紹，告訴你PyTorch寫一個NN的基本架構(?)</p>
+<ul>
+<li>https://fgc.stpi.narl.org.tw/activity/videoDetail/4b1141305d9cd231015d9d0992ef0030</li>
+</ul>
+<h3>Sequence to Sequence</h3>
+<p>這是一篇奇怪的tutorial… 要搭配它的原文看才知道在做什麼@@</p>
+<ul>
+<li>https://pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html</li>
+<li>https://github.com/spro/practical-pytorch/blob/master/seq2seq-translation/seq2seq-translation.ipynb</li>
+<li>https://fgc.stpi.narl.org.tw/activity/videoDetail/4b1141305df38a7c015e194f22f8015b</li>
+</ul>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Some Notes on Reinforcement Learning&amp;url=https://lipolysis.github.io/notes-on-rl-2018.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://lipolysis.github.io/notes-on-rl-2018.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=https://lipolysis.github.io/notes-on-rl-2018.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="https://lipolysis.github.io/tag/reinforcement-learning.html">reinforcement learning</a><a href="https://lipolysis.github.io/tag/ai.html">ai</a><a href="https://lipolysis.github.io/tag/computer-science.html">computer science</a>                </aside>
+
+                <div class="clear"></div>
+
+ 
+
+                </section>
+
+                <script type="text/javascript">
+                    var disqus = 'lipolysis';
+                    var disqus_shortname = 'lipolysis';
+                    var disqus_identifier = '/notes-on-rl-2018.html';
+                    var disqus_url = 'https://lipolysis.github.io/notes-on-rl-2018.html';
+                </script>
+                <noscript>Please enable JavaScript to view the comments.</noscript>                  
+                <section class="post-comments">
+                        <a id="show-disqus" class="post-comments-activate" data-disqus-identifier="/notes-on-rl-2018.html" >Show Comments</a>
+                    <div id="disqus_thread"></div>                  
+                </section>
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+  
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="https://lipolysis.github.io/theme/js/script.js"></script>
+  
+<script type="text/javascript">
+    var disqus_shortname = 'lipolysis';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>
