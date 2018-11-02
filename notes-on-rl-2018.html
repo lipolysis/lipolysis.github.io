@@ -117,7 +117,7 @@
         <div class="inner">
             <section class="post-content">
                 <h3>DRL Lectures</h3>
-<p>http://speech.ee.ntu.edu.tw/~tlkagk/courses_MLDS18.html</p>
+<p><a href="http://speech.ee.ntu.edu.tw/~tlkagk/courses_MLDS18.html">MLDS 2018 lectures</a></p>
 <p>看完這系列的感想就是：GAN跟RL真的是殊途同歸啊~</p>
 <h3>Actor Critic (Advantage Actor-Critic and Pathwise Derivative Policy Gradient)</h3>
 <p>Actor Critic其實是GAN！原本Policy Gradient要用整個trajectory的reward去決定action gradient的權重，現在用Value function + 當前reward代替，就不用on-policy地把整個trajectory試完再train(?)。所以，如果是把Actor(用Policy Gradient決定的network)跟Critic(計算目前這個Actor的Value function或Q function)串起來的話，就跟GAN 87%像，先讓Actor玩一玩，然後Critic學Value function(Discriminator)，Actor再用Critic的Value function用Policy Gradient增強自己(Generator)。</p>
@@ -125,24 +125,24 @@
 <p>記得之前有想過要怎麼做RL without reward，很直覺的想法就是，如果我可以預測做某個action之後的state會變得如何，似乎就是學會了(這件事情很早就有人做過XD)。
 ICM為了解決sparse reward所以想了一個辦法增加人工reward，作法是預測做現在這個action之後下一個state會變成怎樣，把這個預測的下個state跟真實的下個state比較，差距越大越鼓勵去嘗試(可能表示還不太懂需要試試這樣)。問題是有可能兩個state差了一些枝微末節的東西就有很多reward，所以用另一個network預測given現在的state跟真實的下個state，造成這個轉換的action是不是現在要採取的action，用這樣的方式去extract真的可以預測動作造成轉換的feature。</p>
 <p>關於ICM詳細是怎麼做的：</p>
-<p>Curiosity-driven Exploration by Self-supervised Prediction
-* https://pathak22.github.io/noreward-rl/</p>
-<p>其實這篇心得放著很久，是因為看到這個才又想起來：
-Large-Scale Study of Curiosity-Driven Learning</p>
 <ul>
-<li>https://pathak22.github.io/large-scale-curiosity/</li>
-<li>https://blog.openai.com/reinforcement-learning-with-prediction-based-rewards/</li>
+<li><a href="https://pathak22.github.io/noreward-rl/">Curiosity-driven Exploration by Self-supervised Prediction</a></li>
+</ul>
+<p>其實這篇心得放著很久，是因為看到這個才又想起來：</p>
+<ul>
+<li><a href="https://pathak22.github.io/large-scale-curiosity/">Large-Scale Study of Curiosity-Driven Learning</a></li>
+<li><a href="https://blog.openai.com/reinforcement-learning-with-prediction-based-rewards/">Open AI blog post</a></li>
 </ul>
 <h4>Inverse Reinforcement Learning (IRL)</h4>
 <p>IRL也是一種GAN！當沒有reward function卻只有一些expert的經驗當作gold standards時，可以設計一個reward model讓expert trajectory的reward大於actor trajectory的reward(這就是Discriminator)，然後讓actor依照這個reward model去學maximize這個model的policy(就是Generator)。</p>
 <p>Some Links
-<em> https://github.com/openai/baselines
-</em> https://github.com/google/dopamine
-* https://github.com/dbobrenko/reinforcement-learning-notes</p>
+<em> <a href="https://github.com/openai/baselines">Open AI Baselines</a>
+</em> <a href="https://github.com/google/dopamine">Google Dopamine</a>
+* <a href="https://github.com/dbobrenko/reinforcement-learning-notes">RL notes</a></p>
 <h3>Pytorch Tutorials</h3>
 <ul>
-<li>https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html</li>
-<li>https://pytorch.org/tutorials/beginner/saving_loading_models.html</li>
+<li><a href="https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html">Pytorch in 1 hour</a></li>
+<li><a href="https://pytorch.org/tutorials/beginner/saving_loading_models.html">Pytorch saving and loading</a></li>
 </ul>
 <p>這兩篇是基本的PyTorch功能，值得一行一行學起來，也有一個簡單的中文介紹，告訴你PyTorch寫一個NN的基本架構(?)</p>
 <ul>
@@ -151,9 +151,9 @@ Large-Scale Study of Curiosity-Driven Learning</p>
 <h3>Sequence to Sequence</h3>
 <p>這是一篇奇怪的tutorial… 要搭配它的原文看才知道在做什麼@@</p>
 <ul>
-<li>https://pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html</li>
-<li>https://github.com/spro/practical-pytorch/blob/master/seq2seq-translation/seq2seq-translation.ipynb</li>
-<li>https://fgc.stpi.narl.org.tw/activity/videoDetail/4b1141305df38a7c015e194f22f8015b</li>
+<li><a href="https://pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html">Pytorch seq2seq</a></li>
+<li>[Original Tutorial in Pytorch: Bahdanau / Luong attention]https://github.com/spro/practical-pytorch/blob/master/seq2seq-translation/seq2seq-translation.ipynb</li>
+<li><a href="https://fgc.stpi.narl.org.tw/activity/videoDetail/4b1141305df38a7c015e194f22f8015b">中文版</a></li>
 </ul>
             </section>
 
