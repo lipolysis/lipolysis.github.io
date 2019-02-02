@@ -124,9 +124,11 @@
 <li>Repo: https://github.com/bowenliu16/rl_graph_generation</li>
 </ul>
 <p>這篇很潮的點在他做了Graph2Graph Generation，應用在化合物性質的優化上，作者主要做了三個實驗：</p>
-<p>(1)property optimization: given某個性質(penalized logP或QED)，產生那個性質最高的化合物</p>
-<p>(2)property targeting: 產生跟給訂性質範圍最接近的化合物</p>
-<p>(3)constrained property optimization: 這是我覺得最重要的一項，給予一個骨架、片段，要產生一個基於這個骨架、性質最高的化合物。因為通常藥物的lead optimization都是從一個scaffold長出來的，這才是真正實用的地方。</p>
+<ol>
+<li>property optimization: given某個性質(penalized logP或QED)，產生那個性質最高的化合物</li>
+<li>property targeting: 產生跟給訂性質範圍最接近的化合物</li>
+<li>constrained property optimization: 這是我覺得最重要的一項，給予一個骨架、片段，要產生一個基於這個骨架、性質最高的化合物。因為通常藥物的lead optimization都是從一個scaffold長出來的，這才是真正實用的地方。</li>
+</ol>
 <p>所以說他是怎麼做的呢?
 Graph2Graph的encoder是用Graph Convolution(加上可以表達不同種邊的變形)，然後他用了RL來建立整個generation的過程。</p>
 <ul>
@@ -158,14 +160,22 @@ Graph2Graph的encoder是用Graph Convolution(加上可以表達不同種邊的�
 <li>http://www.jmlr.org/papers/volume12/shervashidze11a/shervashidze11a.pdf</li>
 </ul>
 <p>這個WL kernel的想法跟message passing是很相似的，中間的證明沒有很仔細看，我就直接跳到結論：</p>
-<p>(1)若一個aggregation型的Graph NN能將兩個Graph G1跟G2投影至不同embedding，那WL Test也可以。(WL Test是Aggregation Graph NN的upper bound)</p>
-<p>(2)如果經過足夠的回合，一個aggregation型的Graph NN能夠把WL Test判斷不相同的G1跟G2投影至不同embedding，則
-hv(k) = PHI(hv(k-1), f({hu(k-1)}, for all neighbors u of v))中的PHI跟f都要是injective，同樣地graph level輸出的embedding用的函數也要是injective</p>
-<p>(3) 存在某個作用在multiset X上面的函數f，能讓 h(X) = SUM(f(x), for a x in X)是唯一的，而任何的multiset function因此又能被分解為g(X) = PHI(SUM(f(x), for a x in X)) </p>
+<ol>
+<li>若一個aggregation型的Graph NN能將兩個Graph G1跟G2投影至不同embedding，那WL Test也可以。(WL Test是Aggregation Graph NN的upper bound)</li>
+<li>如果經過足夠的回合，一個aggregation型的Graph NN能夠把WL Test判斷不相同的G1跟G2投影至不同embedding，則
+hv(k) = PHI(hv(k-1), f({hu(k-1)}, for all neighbors u of v))中的PHI跟f都要是injective，同樣地graph level輸出的embedding用的函數也要是injective</li>
+<li>存在某個作用在multiset X上面的函數f，能讓 h(X) = SUM(f(x), for a x in X)是唯一的，而任何的multiset function因此又能被分解為g(X) = PHI(SUM(f(x), for a x in X)) </li>
+</ol>
 <p>所以經由上面三項基礎，作者提出了GIN，很簡單就是長這樣:</p>
-<p>hv(k) = MLP(k){(1+e)hv(k-1)+SUM({hu(k-1)}, for all neighbors u of v)}</p>
+<div class="highlight"><pre><span></span>hv(k) = MLP(k){(1+e)hv(k-1)+SUM({hu(k-1)}, for all neighbors u of v)}
+</pre></div>
+
+
 <p>他用一個multi-layer perceptron(必須要大於一層，因為Hornik說這樣才能approximate任意函數XD)來做這個injective aggregate function(approximate傳說中的PHI然後f)。就是如此簡單XD</p>
-<p>hG = CONCAT(SUM({hv(k)}, for all v in G), k from 0 to K)</p>
+<div class="highlight"><pre><span></span>hG = CONCAT(SUM({hv(k)}, for all v in G), k from 0 to K)
+</pre></div>
+
+
 <p>因為graph level的readout時，每個點都已經做過PHI又做過f了，所以直接sum起來output就可以！</p>
 <p>作者後面提到如果aggregation用mean的話，會變成學到distribution，就是不同周遭點種類的比例，如果用max的話，會只學到set，而GIN則是能夠表達multiset。實驗方面作者是做了許多Graph classification的benchmark，發現GIN都能接近或稍微優於WL subtree+SVM的準確率，而1-layer perceptron、aggregation用mean或是max都顯著較差。</p>
 <p>總之這篇真的滿有趣，以前自己都會想說到底max跟mean誰好誰壞是怎麼決定的，像是GCPN就直接說他覺得sum比較好，也期待看到GIN在其他task的成果。作者也提到，未來要想怎麼超脫aggregation類Graph NN，像是前面提到GCPN每次要重新encode，如果不用aggregation是不是就能比較有效率做到呢?</p>
