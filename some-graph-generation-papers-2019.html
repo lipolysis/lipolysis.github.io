@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Graph Generation, GCPN and GIN</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="https://lipolysis.github.io" rel="canonical" />
+
+  <!-- Feed -->
+
+  <link href="https://lipolysis.github.io/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="https://lipolysis.github.io/theme/css/code_blocks/github.css" rel="stylesheet">
+
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+    <link href="https://lipolysis.github.io/some-graph-generation-papers-2019.html" rel="canonical" />
+
+        <meta name="description" content="Some graph generation paper summaries">
+
+        <meta name="author" content="Alexander Shieh">
+
+        <meta name="tags" content="computer science">
+        <meta name="tags" content="machine learning">
+        <meta name="tags" content="graph">
+
+        <meta property="og:locale" content="" />
+    <meta property="og:site_name" content="Lipolysis" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Lipolysis" />
+    <meta property="og:description" content="View the blog." />
+    <meta property="og:url" content="https://lipolysis.github.io" />
+      <meta name="og:image" content="https://lipolysis.github.io/theme/images/post-bg.jpg">
+
+  <meta property="og:type" content="article">
+            <meta property="article:author" content="https://lipolysis.github.io/author/alexander-shieh.html">
+  <meta property="og:url" content="https://lipolysis.github.io/some-graph-generation-papers-2019.html">
+  <meta property="og:title" content="Graph Generation, GCPN and GIN">
+  <meta property="article:published_time" content="2019-02-02 21:00:00+08:00">
+            <meta property="og:description" content="Some graph generation paper summaries">
+
+            <meta property="og:image" content="https://lipolysis.github.io/theme/images/post-bg.jpg">
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+
+              <li role="presentation"><a href="https://lipolysis.github.io/pages/about.html">About</a></li>
+              <li role="presentation"><a href="https://lipolysis.github.io/pages/projects.html">Projects</a></li>
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="https://lipolysis.github.io" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Graph Generation, GCPN and GIN</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="https://lipolysis.github.io/author/alexander-shieh.html">Alexander shieh</a>
+            | <time datetime="六 02 二月 2019">六 02 二月 2019</time>
+        </span>
+        <!-- TODO : Modified check -->
+        
+            <div class="post-cover cover" style="background-image: url('https://lipolysis.github.io/theme/images/post-bg.jpg')">
+        
+      </div>
+    </header>    
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <p>分享一下最近看的兩篇跟Graph有關的paper，感覺道理都非常直覺，又做得滿完整的。</p>
+<h2>NIPS 2018 spotlight: Graph Convolutional Policy Network for Goal-Directed Molecular Graph Generation</h2>
+<p>以下稱作GCPN</p>
+<ul>
+<li>Paper: <a href="https://arxiv.org/abs/1806.02473">https://arxiv.org/abs/1806.02473</a></li>
+<li>Repo: <a href="https://github.com/bowenliu16/rl_graph_generation">https://github.com/bowenliu16/rl_graph_generation</a></li>
+</ul>
+<p>這篇很潮的點在他做了Graph2Graph Generation，應用在化合物性質的優化上，作者主要做了三個實驗：</p>
+<ol>
+<li>property optimization: given某個性質(penalized logP或QED)，產生那個性質最高的化合物</li>
+<li>property targeting: 產生跟給訂性質範圍最接近的化合物</li>
+<li>constrained property optimization: 這是我覺得最重要的一項，給予一個骨架、片段，要產生一個基於這個骨架、性質最高的化合物。因為通常藥物的lead optimization都是從一個scaffold長出來的，這才是真正實用的地方。</li>
+</ol>
+<p>所以說他是怎麼做的呢?
+Graph2Graph的encoder是用Graph Convolution(加上可以表達不同種邊的變形)，然後他用了RL來建立整個generation的過程。</p>
+<ul>
+<li>State: 就是目前產生的化合物，Graph Convoultion之後的樣子</li>
+<li>Action: 可以選擇跟已經產生的原子相連(而也有不同bond type)，或是跟新的fragment(原子、官能基等)相連。這步驟比較複雜一點，是先做一個softmax(MfX)，X就是最後一層的H(L)，用這個distribution產生鍵結的第一個原子。第一個原子的hidden叫做Xfirst，接著再做一個softmax(Ms(Xfirst, X))，根據這個distribution產生第二個原子，叫做Xsecond，然後決定edge(bond) type，用softmax(Me(Xfirst, Xsecond))，最後還要把整個graph的representation丟進去個評估是不是最後一步的softmax(Mt(SUM(X)))，(其實應該也可以是sigmoid?)。</li>
+<li>Transition: 的時候作者有特別加入一些價電子的檢查之類的，確保產生的東西不會爆炸，不然就不會執行那個action</li>
+<li>Reward: 有跟目標性質距離的reward，也有一些跟產生的化合物是否合理的reward</li>
+<li>GAN: 為了確保產生的graph跟training的distribution長得有像，作者加入GAN的loss當作一種reward，這個GAN是可以用gradient descent train的</li>
+</ul>
+<p>然後這整個過程是用policy gradient中著名的Proximal Policy Optimization (PPO)來練的，不過這裡就省略PPO(主要是因為我忘了XD)
+總之，就是弄出個policy network啦 &gt; &lt;
+接著作者就說他在這三個task都是SOTA，如果有人有興趣的話可以幫忙看看下面這篇他們主要的競爭對手，聽說又反超了(?)：</p>
+<p>ICLR 2019 poster: Learning Multimodal Graph-to-Graph Translation for Molecule Optimization，或是稱作VJTNN。</p>
+<ul>
+<li>Paper: <a href="https://openreview.net/forum?id=B1xJAsA5F7">https://openreview.net/forum?id=B1xJAsA5F7</a></li>
+<li>Repo: <a href="https://github.com/wengong-jin/iclr19-graph2graph">https://github.com/wengong-jin/iclr19-graph2graph</a></li>
+</ul>
+<p>我的感覺是GCPN把現今所有炫砲的方法都用上了，暴力湊出可以作到Graph2Graph的方法(也有人用RNN-based)，真是勇氣可嘉，不過還是希望有人能夠發明不用RL做generation的方法，然後那個state可以不用每次都重新encode，感覺非常浪費時間@@</p>
+<h2>ICLR 2019 oral: How Powerful are Graph Neural Networks?</h2>
+<p>以下稱作GIN (Graph Isomerism Network)</p>
+<ul>
+<li>Paper: <a href="https://openreview.net/forum?id=ryGs6iA5Km">https://openreview.net/forum?id=ryGs6iA5Km</a></li>
+<li>Repo: ???</li>
+</ul>
+<p>這其實是一篇理論的paper，在講說現在常見的Graph NN其實representation的能力不夠好，而作者主要的想法是，這種message passing(就是從周遭的node去aggregate訊息)的NN，最好是能夠injective(1-to-1)地表達一個node周遭點的關係(也就是解決graph isomorphism)，這些周遭的點可以構成一個multiset，有些點label一樣，有些不太一樣，經過多個回合的aggregate之後，還是要能盡量分辨出不同的subgraph。
+(補充一下，graph isomorphism是個經典演算法問題，目前沒有polynomial time作法)</p>
+<p>所以作者提出了一個有趣的作法叫做Weisfeiler-Lehman test for graph isomorphism，衍生出一種representation方法就坐WL Graph/Subtree Kernel，主要的想法是可以用一棵樹來展開相鄰的點，而每一次展開都會把展開樹不同的點重新編號一波，然後把整個graph變成一個類似fingerprint的東西，每個dim代表第幾回合的某一種展開樹有幾棵(就是有幾個點他們周遭距離k都長得一樣)，用這個representation來分辨不同的graph，有興趣可以參考JMLR 2011: Weisfeiler-Lehman Graph Kernels</p>
+<ul>
+<li><a href="http://www.jmlr.org/papers/volume12/shervashidze11a/shervashidze11a.pdf">http://www.jmlr.org/papers/volume12/shervashidze11a/shervashidze11a.pdf</a></li>
+</ul>
+<p>這個WL kernel的想法跟message passing是很相似的，中間的證明沒有很仔細看，我就直接跳到結論：</p>
+<ol>
+<li>若一個aggregation型的Graph NN能將兩個Graph G1跟G2投影至不同embedding，那WL Test也可以。(WL Test是Aggregation Graph NN的upper bound)</li>
+<li>如果經過足夠的回合，一個aggregation型的Graph NN能夠把WL Test判斷不相同的G1跟G2投影至不同embedding，則
+hv(k) = PHI(hv(k-1), f({hu(k-1)}, for all neighbors u of v))中的PHI跟f都要是injective，同樣地graph level輸出的embedding用的函數也要是injective</li>
+<li>存在某個作用在multiset X上面的函數f，能讓 h(X) = SUM(f(x), for a x in X)是唯一的，而任何的multiset function因此又能被分解為g(X) = PHI(SUM(f(x), for a x in X)) </li>
+</ol>
+<p>所以經由上面三項基礎，作者提出了GIN，很簡單就是長這樣:</p>
+<div class="highlight"><pre><span></span>hv(k) = MLP(k){(1+e)hv(k-1)+SUM({hu(k-1)}, for all neighbors u of v)}
+</pre></div>
+
+
+<p>他用一個multi-layer perceptron(必須要大於一層，因為Hornik說這樣才能approximate任意函數XD)來做這個injective aggregate function(approximate傳說中的PHI然後f)。就是如此簡單XD</p>
+<div class="highlight"><pre><span></span>hG = CONCAT(SUM({hv(k)}, for all v in G), k from 0 to K)
+</pre></div>
+
+
+<p>因為graph level的readout時，每個點都已經做過PHI又做過f了，所以直接sum起來output就可以！</p>
+<p>作者後面提到如果aggregation用mean的話，會變成學到distribution，就是不同周遭點種類的比例，如果用max的話，會只學到set，而GIN則是能夠表達multiset。實驗方面作者是做了許多Graph classification的benchmark，發現GIN都能接近或稍微優於WL subtree+SVM的準確率，而1-layer perceptron、aggregation用mean或是max都顯著較差。</p>
+<p>總之這篇真的滿有趣，以前自己都會想說到底max跟mean誰好誰壞是怎麼決定的，像是GCPN就直接說他覺得sum比較好，也期待看到GIN在其他task的成果。作者也提到，未來要想怎麼超脫aggregation類Graph NN，像是前面提到GCPN每次要重新encode，如果不用aggregation是不是就能比較有效率做到呢?</p>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Graph Generation, GCPN and GIN&amp;url=https://lipolysis.github.io/some-graph-generation-papers-2019.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://lipolysis.github.io/some-graph-generation-papers-2019.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=https://lipolysis.github.io/some-graph-generation-papers-2019.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="https://lipolysis.github.io/tag/computer-science.html">computer science</a><a href="https://lipolysis.github.io/tag/machine-learning.html">machine learning</a><a href="https://lipolysis.github.io/tag/graph.html">graph</a>                </aside>
+
+                <div class="clear"></div>
+
+ 
+
+                </section>
+
+                <script type="text/javascript">
+                    var disqus = 'lipolysis';
+                    var disqus_shortname = 'lipolysis';
+                    var disqus_identifier = '/some-graph-generation-papers-2019.html';
+                    var disqus_url = 'https://lipolysis.github.io/some-graph-generation-papers-2019.html';
+                </script>
+                <noscript>Please enable JavaScript to view the comments.</noscript>                  
+                <section class="post-comments">
+                        <a id="show-disqus" class="post-comments-activate" data-disqus-identifier="/some-graph-generation-papers-2019.html" >Show Comments</a>
+                    <div id="disqus_thread"></div>                  
+                </section>
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+  
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="https://lipolysis.github.io/theme/js/script.js"></script>
+  
+<script type="text/javascript">
+    var disqus_shortname = 'lipolysis';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>
