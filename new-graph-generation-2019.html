@@ -120,8 +120,8 @@
 <h2>NIPS 2018 spotlight: Graph Convolutional Policy Network for Goal-Directed Molecular Graph Generation</h2>
 <p>以下稱作GCPN</p>
 <ul>
-<li>Paper: https://arxiv.org/abs/1806.02473</li>
-<li>Repo: https://github.com/bowenliu16/rl_graph_generation</li>
+<li>Paper: <a href="https://arxiv.org/abs/1806.02473">https://arxiv.org/abs/1806.02473</a></li>
+<li>Repo: <a href="https://github.com/bowenliu16/rl_graph_generation">https://github.com/bowenliu16/rl_graph_generation</a></li>
 </ul>
 <p>這篇很潮的點在他做了Graph2Graph Generation，應用在化合物性質的優化上，作者主要做了三個實驗：</p>
 <ol>
@@ -143,21 +143,21 @@ Graph2Graph的encoder是用Graph Convolution(加上可以表達不同種邊的�
 接著作者就說他在這三個task都是SOTA，如果有人有興趣的話可以幫忙看看下面這篇他們主要的競爭對手，聽說又反超了(?)：</p>
 <p>ICLR 2019 poster: Learning Multimodal Graph-to-Graph Translation for Molecule Optimization，或是稱作VJTNN。</p>
 <ul>
-<li>Paper: https://openreview.net/forum?id=B1xJAsA5F7</li>
-<li>Repo: https://github.com/wengong-jin/iclr19-graph2graph</li>
+<li>Paper: <a href="https://openreview.net/forum?id=B1xJAsA5F7">https://openreview.net/forum?id=B1xJAsA5F7</a></li>
+<li>Repo: <a href="https://github.com/wengong-jin/iclr19-graph2graph">https://github.com/wengong-jin/iclr19-graph2graph</a></li>
 </ul>
 <p>我的感覺是GCPN把現今所有炫砲的方法都用上了，暴力湊出可以作到Graph2Graph的方法(也有人用RNN-based)，真是勇氣可嘉，不過還是希望有人能夠發明不用RL做generation的方法，然後那個state可以不用每次都重新encode，感覺非常浪費時間@@</p>
 <h2>ICLR 2019 oral: How Powerful are Graph Neural Networks?</h2>
 <p>以下稱作GIN (Graph Isomerism Network)</p>
 <ul>
-<li>Paper: https://openreview.net/forum?id=ryGs6iA5Km</li>
+<li>Paper: <a href="https://openreview.net/forum?id=ryGs6iA5Km">https://openreview.net/forum?id=ryGs6iA5Km</a></li>
 <li>Repo: ???</li>
 </ul>
 <p>這其實是一篇理論的paper，在講說現在常見的Graph NN其實representation的能力不夠好，而作者主要的想法是，這種message passing(就是從周遭的node去aggregate訊息)的NN，最好是能夠injective(1-to-1)地表達一個node周遭點的關係(也就是解決graph isomorphism)，這些周遭的點可以構成一個multiset，有些點label一樣，有些不太一樣，經過多個回合的aggregate之後，還是要能盡量分辨出不同的subgraph。
 (補充一下，graph isomorphism是個經典演算法問題，目前沒有polynomial time作法)</p>
 <p>所以作者提出了一個有趣的作法叫做Weisfeiler-Lehman test for graph isomorphism，衍生出一種representation方法就坐WL Graph/Subtree Kernel，主要的想法是可以用一棵樹來展開相鄰的點，而每一次展開都會把展開樹不同的點重新編號一波，然後把整個graph變成一個類似fingerprint的東西，每個dim代表第幾回合的某一種展開樹有幾棵(就是有幾個點他們周遭距離k都長得一樣)，用這個representation來分辨不同的graph，有興趣可以參考JMLR 2011: Weisfeiler-Lehman Graph Kernels</p>
 <ul>
-<li>http://www.jmlr.org/papers/volume12/shervashidze11a/shervashidze11a.pdf</li>
+<li><a href="http://www.jmlr.org/papers/volume12/shervashidze11a/shervashidze11a.pdf">http://www.jmlr.org/papers/volume12/shervashidze11a/shervashidze11a.pdf</a></li>
 </ul>
 <p>這個WL kernel的想法跟message passing是很相似的，中間的證明沒有很仔細看，我就直接跳到結論：</p>
 <ol>
