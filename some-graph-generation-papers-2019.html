@@ -178,7 +178,7 @@ hv(k) = PHI(hv(k-1), f({hu(k-1)}, for all neighbors u of v))中的PHI跟f都要�
 
 <p>因為graph level的readout時，每個點都已經做過PHI又做過f了，所以直接sum起來output就可以！</p>
 <p>作者後面提到如果aggregation用mean的話，會變成學到distribution，就是不同周遭點種類的比例，如果用max的話，會只學到set，而GIN則是能夠表達multiset。實驗方面作者是做了許多Graph classification的benchmark，發現GIN都能接近或稍微優於WL subtree+SVM的準確率，而1-layer perceptron、aggregation用mean或是max都顯著較差。</p>
-<p>總之這篇真的滿有趣，以前自己都會想說到底max跟mean誰好誰壞是怎麼決定的，像是GCPN就直接說他覺得sum比較好，也期待看到GIN在其他task的成果。作者也提到，未來要想怎麼超脫aggregation類Graph NN，像是前面提到GCPN每次要重新encode，如果不用aggregation是不是就能比較有效率做到呢?</p>
+<p>總之這篇真的滿有趣，期待之後看到GIN在其他task的成果。以前自己都會想說到底max跟mean誰好誰壞是怎麼決定的，像是GCPN就直接說他覺得sum比較好。作者也提到，未來要想怎麼超脫aggregation類Graph NN，像是前面提到GCPN每次要重新encode，如果不用aggregation是不是就能比較有效率做到呢?</p>
             </section>
 
             <section class="post-info">

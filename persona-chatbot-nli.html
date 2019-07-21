@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Persona Chatbot and NLI</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="https://lipolysis.github.io" rel="canonical" />
+
+  <!-- Feed -->
+
+  <link href="https://lipolysis.github.io/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="https://lipolysis.github.io/theme/css/code_blocks/github.css" rel="stylesheet">
+
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+    <link href="https://lipolysis.github.io/persona-chatbot-nli.html" rel="canonical" />
+
+        <meta name="description" content="Paper titles that I read">
+
+        <meta name="author" content="Alexander Shieh">
+
+        <meta name="tags" content="nlp">
+        <meta name="tags" content="nlu">
+        <meta name="tags" content="ai">
+        <meta name="tags" content="computer science">
+
+        <meta property="og:locale" content="" />
+    <meta property="og:site_name" content="Lipolysis" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Lipolysis" />
+    <meta property="og:description" content="View the blog." />
+    <meta property="og:url" content="https://lipolysis.github.io" />
+      <meta name="og:image" content="https://lipolysis.github.io/theme/images/post-bg.jpg">
+
+  <meta property="og:type" content="article">
+            <meta property="article:author" content="https://lipolysis.github.io/author/alexander-shieh.html">
+  <meta property="og:url" content="https://lipolysis.github.io/persona-chatbot-nli.html">
+  <meta property="og:title" content="Persona Chatbot and NLI">
+  <meta property="article:published_time" content="2019-07-21 00:00:00+08:00">
+            <meta property="og:description" content="Paper titles that I read">
+
+            <meta property="og:image" content="https://lipolysis.github.io/theme/images/post-bg.jpg">
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+
+              <li role="presentation"><a href="https://lipolysis.github.io/pages/about.html">About</a></li>
+              <li role="presentation"><a href="https://lipolysis.github.io/pages/projects.html">Projects</a></li>
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="https://lipolysis.github.io" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Persona Chatbot and NLI</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="https://lipolysis.github.io/author/alexander-shieh.html">Alexander shieh</a>
+            | <time datetime="日 21 七月 2019">日 21 七月 2019</time>
+        </span>
+        <!-- TODO : Modified check -->
+        
+            <div class="post-cover cover" style="background-image: url('https://lipolysis.github.io/theme/images/post-bg.jpg')">
+        
+      </div>
+    </header>    
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <p>最近因為要做一些跟Human Evaluation有關的事情，所以覺得NLP中跟"人"有關的事情其實滿有趣的，畢竟很多NLP應用的宗旨是要跟人互動，但在做研究的時候常常就是跑一些冷冰冰的數字來評估好壞，像是Precision、Recall、F1或是ROUGE、BLEU之類的。但是他們真的代表"人"的感受嗎？加上之前有稍微看過Persona Chatbot相關的介紹，所以就來分享一下最近跟Persona Chatbot有關的2篇文章(其實出來一陣子了OAO，說不定有人看過XD)～</p>
+<h2>Dialogue Natural Language Inference, ACL 2019</h2>
+<ul>
+<li><a href="https://wellecks.github.io/dialogue_nli/">https://wellecks.github.io/dialogue_nli/</a></li>
+</ul>
+<p>這篇是NYU+FAIR做的，作者都是滿有名的人XD，我絕對不會說會看到這篇是因為跟我想做的東西有點像XDDD</p>
+<p>首先介紹兩個概念，第一個是NLI：簡單來說NLI是一個classification task，就是有兩個句子A跟B，如果B可以從A推論出來，就是entail。如果B的內容與A有所牴觸，則是contradiction。如果B有些內容無法從A推論出來，則是neutral。NLI是自然語言理解中很常用到的一種dataset，像是SNLI、MultiNLI和RTE系列等等，有興趣可以看GLUE裡面的那些經典NLI dataset。</p>
+<ul>
+<li><a href="https://aclweb.org/aclwiki/Textual_Entailment_Portal">https://aclweb.org/aclwiki/Textual_Entailment_Portal</a></li>
+<li><a href="https://gluebenchmark.com/tasks">https://gluebenchmark.com/tasks</a></li>
+</ul>
+<p>第二個是Persona Chatbot，其實就是有"人設"的聊天機器人，通常人物設定(Persona)會是一些句子，比如說自己居住的地方、家庭有哪些人、喜歡看什麼電影之類的。這種人設聊天機器人一個很重要的目標就是，不能人格分裂，也就是發生聊天時人設前後矛盾的情況。那"人設"聊天的對話內容，其實就是一個交換個資(x)的過程，不過也必須是讓人感覺很輕鬆自在地...交換個資...，基本上這篇的宗旨就是在用NLI避免人設前後矛盾這樣。</p>
+<p>作者們用了各種標注跟擴充的方式蒐集了很多(對話句子,人設句子)、(人設句子,人設句子)這樣的pair，然後每句對話或人設都被標注成一個triple：(e1, r, e2)，比如說e1是我，r是喜歡的活動，e2是看劇。所以說(e1, r, e2)皆相同的就是一個entail的pair，如果兩者的r剛好相反，或是e1、r相同但e2不一樣(只有用在物理性質，比如說tall、short跟large、small這種差別)，就是contradict，至於neutral則是triple中r根本不一樣。</p>
+<p>然後作者就用了一個叫做ESIM的model來train在這個新蒐集的Dialogue NLI，發現accuracy可以到88.2%，跟SNLI的表現差不多(~88%)，可是如果是train在SNLI上但predict Dialogue NLI則準確率超慘的(~47%)，代表domain不同是差滿多的...尷尬。</p>
+<ul>
+<li>Enhanced LSTM for Natural Language Inference (ESIM), ACL 2017 ：<a href="https://aclweb.org/anthology/P17-1152">https://aclweb.org/anthology/P17-1152</a></li>
+<li>Pytorch ESIM： <a href="https://github.com/coetaur0/ESIM">https://github.com/coetaur0/ESIM</a></li>
+</ul>
+<p>然後他們嘗試了一種reranking的方式來決定對話中下一句話要講什麼，一開始是用一個Key-Value memory network來把可能的下一句話u_i打分數，分數由高到低是s_1到s_n之類的，然後用：<span class="math">\(s_i^{re-rank} = s_i - \lambda (s_1-s_k) s_i^{contradict}\)</span> 來重新排序，s_i^{contradict}是NLI model預測u_i與所有人設句子p_i的max contradict機率。我是覺得這個rerank公式有點神秘...作者有說其實也應該跟之前所有說過的句子算contradict，但這篇裡面還沒做。
+Personalizing Dialogue Agents: I have a dog, do you have pets too? (Persona-Chat)：https://arxiv.org/abs/1801.07243</p>
+<p>現在重點來了，reranking的效果真的好嗎？作者先生出一個滿人工的test set，有三種情境Haves、Likes跟Attributes，每個example是要排序下一句話，而可能的句子中entail、contradict、neutral各有10句，然後算他們Hits@1(第一名就是正解的下一句)、Contradict@1(第一名剛好是反的)、Entail@1(第一名算是對的)。總之Hits@1、Entail@1都有增加，特別是Haves跟Likes這兩種增加許多，而Contradict@1都有減少。不過實際上去跟人聊天之後，在5分的scale之下，每個對話從平均2.11(2.21)成長為2.34(2.38)(咦這樣有很多嗎)，然後有兩個是回覆0/1的問題：consistent(從0.24到0.28)跟contradiction(從0.23到0.19)，則是成長比較多(?)，不過可以看出這實在不是個容易的task。我覺得這種用不同task的paper滿特別的，最近也有用Entail來評估Dialogue的作品，大家還想到Entail可以拿來做什麼嗎XD？</p>
+<ul>
+<li>Evaluating Coherence in Dialogue Systems using Entailment, NAACL-HLT 2019： <a href="https://arxiv.org/abs/1904.03371">https://arxiv.org/abs/1904.03371</a></li>
+</ul>
+<p>Evaluating Coherence in Dialogue Systems using Entailment, NAACL-HLT 2019： https://arxiv.org/abs/1904.03371</p>
+<h2>What makes a good conversation? How controllable attributes affect human judgments, NAACL 2019</h2>
+<ul>
+<li><a href="https://parl.ai/projects/controllable_dialogue/">https://parl.ai/projects/controllable_dialogue/</a></li>
+</ul>
+<p>這篇一作是abstractive summarization一個很常用的model，pointer-generator network的作者在FAIR的研究。</p>
+<p>身為一個不太會聊天的人，其實就滿想知道到底怎樣算是一個好的聊天體驗？作者一開始就說dialogue level的評價其實滿重要的，過去常常都在研究下一句話會是什麼(next utterence prediction)，而前面也說過一些自動評分的方式並沒有跟人的感受有直接的關係。可能因為human evaluation成本比較高，大家常常都是做一些可以很快知道成果、或是有簡單的數字可以看出好壞的研究，忽略了人的真實感受QAQ，所以這篇的作者就想研究在dialogue level控制一些稍微low-level的對話性質到底對整體對話品質有什麼影響，算是少數大規模的human evaluation實驗。</p>
+<p>主要作者的操作分為：Dialogue level的Conditional Training跟Weighted Decoding，基本的model就是常見的BiLSTM with attention。其實都很簡單，Conditional Training就是在decode的時候，把要control的變數z的embedding直接concat到decoder input，整個dialogue都concat同一個z的embedding，不過這代表說連續的z就會變成離散的bucket，在training之前也要先想辦法標注然後分群再train。Weighted Decoding就是在word-level decode的時候，根據過去對話和persona x、已經產生的字y，選一個字w的分數是score(w,y;x)：目前生成到現在的分數score(y;x)+產生這個文字w的RNN output機率logP_RNN(w|y,x)+選這個w，given之前產生的內容和背景，weighted過的feature分數SUM_i(w_if_i(w;y,x))。w_i、f_i是針對那個feature的weight跟feature value。</p>
+<p>可能前面看起來有點複雜，不過用他控制的4個feature就可以很明顯看出來：</p>
+<h4>Repetition</h4>
+<p>其實repetition真的是很常見的RNN generation問題，這個作者用weighted decoding來解決它，就是算external(自己講的不同句子之間)、internal(同一個句子內)和partner(自己講的跟對方講的句子)的bigram和unigram overlap(partner沒有算unigram)，然後給他一些負的feature分數，在beam search的時候就可以避免repetition。</p>
+<h4>Specificity</h4>
+<p>當問說，今天要吃啥，然後有人回答：隨便，都好，我都吃之類的，484有點討厭(x)，就是specificity不夠XDDD～
+要控制這件事可以用normalized IDF(NIDF)當作feature(越是罕見的字分數越高)，作者發現如果用weighted decoding，如果這個weight太大會產生很多nonsense的東西，但用conditional training，先將句子的mean NIDF進行分群，則可以產生比較合理的句子。</p>
+<h4>Response-relatedness</h4>
+<p>作者發現baseline model常常會講一些跟目前的對話無關的東西。怎麼控制呢？用weighted decoding的話就是算產生一個字w的embedding與整個句子的embedding的cosine similarity當作feature，就是這麼直接，有趣的是作者用了simple but tough to beat來做sentence embedding XDDD，然後他發現controlled generation弄不出來。</p>
+<h4>Question-asking</h4>
+<p>QA的比例作者是用Conditional training做的，所有的對話分成11組，i從0-10分別代表i/10的比例是問句(作者用有問號的句子來分)。結果train出來的model真的各個比例的問句都有(圖上看起來比target再多了一些)，這個方法比weighted decoding用疑問詞來當feature的方法好許多。</p>
+<p>最後作者的human evaluation是用了一個1-4分、8個問題的問卷(inquisitiveness是3分optimal、4分太多，而avoiding repetition只有1-3分)，結果發現engagingness方面，用conditional training的question control (i=7) 加上weighted decoding減少repetition得到3.1分的平均分數，遠遠超過baseline(~2.3分)，而當年ConvAI2比賽的冠軍可是用了GPT才達到這樣的效果(不過他們的test set不同)。其他的實驗顯示說specificity經過weighted decoding加上repetition control後，interestingness、listening跟humanness分數是比較高的。而作者也做了A/B testing發現大部分的時候(~84%)控制specificity加repetition都比單控制repetition來得有趣。不過以fluency來說則是光是repetition control就有接近最好的表現。</p>
+<p>有趣的是雖然engagingness、avoiding repetition、interestingness都有接近人的分數，人的inquisitiveness、fluency(XDDD)是比這幾個方式都低的(但是還是遠超過baseline)，而在making sense跟humanness方面則是與人還有很大的差距。不過作者最後結論有說到，平衡各方面的屬性是一個聊天機器人很重要的工作，也就是有好的conversational flow~，而且作者覺得不一定要"像人"才能產生有趣、深入的對話(從engagingness、interestingness都是接近人的分數來看)。總之，趕快control repetition吧XD！其他方面我是覺得這還是跟human evaluation問的問題有滿大的關係，如果可以多挑出一些"不像人"的原因會得到更多見解，從中也可以幫助我們設計更好的chatbot。</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    var location_protocol = (false) ? 'https' : document.location.protocol;
+    if (location_protocol !== 'http' && location_protocol !== 'https') location_protocol = 'https:';
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = location_protocol + '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' }, Macros: {} }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Persona Chatbot and NLI&amp;url=https://lipolysis.github.io/persona-chatbot-nli.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://lipolysis.github.io/persona-chatbot-nli.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=https://lipolysis.github.io/persona-chatbot-nli.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="https://lipolysis.github.io/tag/nlp.html">nlp</a><a href="https://lipolysis.github.io/tag/nlu.html">nlu</a><a href="https://lipolysis.github.io/tag/ai.html">ai</a><a href="https://lipolysis.github.io/tag/computer-science.html">computer science</a>                </aside>
+
+                <div class="clear"></div>
+
+ 
+
+                </section>
+
+                <script type="text/javascript">
+                    var disqus = 'lipolysis';
+                    var disqus_shortname = 'lipolysis';
+                    var disqus_identifier = '/persona-chatbot-nli.html';
+                    var disqus_url = 'https://lipolysis.github.io/persona-chatbot-nli.html';
+                </script>
+                <noscript>Please enable JavaScript to view the comments.</noscript>                  
+                <section class="post-comments">
+                        <a id="show-disqus" class="post-comments-activate" data-disqus-identifier="/persona-chatbot-nli.html" >Show Comments</a>
+                    <div id="disqus_thread"></div>                  
+                </section>
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+  
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="https://lipolysis.github.io/theme/js/script.js"></script>
+  
+<script type="text/javascript">
+    var disqus_shortname = 'lipolysis';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>
