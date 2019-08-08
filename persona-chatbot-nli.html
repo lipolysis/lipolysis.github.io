@@ -135,8 +135,10 @@
 <li>Enhanced LSTM for Natural Language Inference (ESIM), ACL 2017 ：<a href="https://aclweb.org/anthology/P17-1152">https://aclweb.org/anthology/P17-1152</a></li>
 <li>Pytorch ESIM： <a href="https://github.com/coetaur0/ESIM">https://github.com/coetaur0/ESIM</a></li>
 </ul>
-<p>然後他們嘗試了一種reranking的方式來決定對話中下一句話要講什麼，一開始是用一個Key-Value memory network來把可能的下一句話u_i打分數，分數由高到低是s_1到s_n之類的，然後用：<span class="math">\(s_i^{re-rank} = s_i - \lambda (s_1-s_k) s_i^{contradict}\)</span> 來重新排序，s_i^{contradict}是NLI model預測u_i與所有人設句子p_i的max contradict機率。我是覺得這個rerank公式有點神秘...作者有說其實也應該跟之前所有說過的句子算contradict，但這篇裡面還沒做。
-Personalizing Dialogue Agents: I have a dog, do you have pets too? (Persona-Chat)：https://arxiv.org/abs/1801.07243</p>
+<p>然後他們嘗試了一種reranking的方式來決定對話中下一句話要講什麼，一開始是用一個Key-Value memory network來把可能的下一句話u_i打分數，分數由高到低是s_1到s_n之類的，然後用：<span class="math">\(s_i^{re-rank} = s_i - \lambda (s_1-s_k) s_i^{contradict}\)</span> 來重新排序，s_i^{contradict}是NLI model預測u_i與所有人設句子p_i的max contradict機率。我是覺得這個rerank公式有點神秘...作者有說其實也應該跟之前所有說過的句子算contradict，但這篇裡面還沒做。</p>
+<ul>
+<li>Personalizing Dialogue Agents: I have a dog, do you have pets too? (Persona-Chat)：<a href="https://arxiv.org/abs/1801.07243">https://arxiv.org/abs/1801.07243</a></li>
+</ul>
 <p>現在重點來了，reranking的效果真的好嗎？作者先生出一個滿人工的test set，有三種情境Haves、Likes跟Attributes，每個example是要排序下一句話，而可能的句子中entail、contradict、neutral各有10句，然後算他們Hits@1(第一名就是正解的下一句)、Contradict@1(第一名剛好是反的)、Entail@1(第一名算是對的)。總之Hits@1、Entail@1都有增加，特別是Haves跟Likes這兩種增加許多，而Contradict@1都有減少。不過實際上去跟人聊天之後，在5分的scale之下，每個對話從平均2.11(2.21)成長為2.34(2.38)(咦這樣有很多嗎)，然後有兩個是回覆0/1的問題：consistent(從0.24到0.28)跟contradiction(從0.23到0.19)，則是成長比較多(?)，不過可以看出這實在不是個容易的task。我覺得這種用不同task的paper滿特別的，最近也有用Entail來評估Dialogue的作品，大家還想到Entail可以拿來做什麼嗎XD？</p>
 <ul>
 <li>Evaluating Coherence in Dialogue Systems using Entailment, NAACL-HLT 2019： <a href="https://arxiv.org/abs/1904.03371">https://arxiv.org/abs/1904.03371</a></li>
@@ -159,7 +161,10 @@ Personalizing Dialogue Agents: I have a dog, do you have pets too? (Persona-Chat
 <h4>Question-asking</h4>
 <p>QA的比例作者是用Conditional training做的，所有的對話分成11組，i從0-10分別代表i/10的比例是問句(作者用有問號的句子來分)。結果train出來的model真的各個比例的問句都有(圖上看起來比target再多了一些)，這個方法比weighted decoding用疑問詞來當feature的方法好許多。</p>
 <p>最後作者的human evaluation是用了一個1-4分、8個問題的問卷(inquisitiveness是3分optimal、4分太多，而avoiding repetition只有1-3分)，結果發現engagingness方面，用conditional training的question control (i=7) 加上weighted decoding減少repetition得到3.1分的平均分數，遠遠超過baseline(~2.3分)，而當年ConvAI2比賽的冠軍可是用了GPT才達到這樣的效果(不過他們的test set不同)。其他的實驗顯示說specificity經過weighted decoding加上repetition control後，interestingness、listening跟humanness分數是比較高的。而作者也做了A/B testing發現大部分的時候(~84%)控制specificity加repetition都比單控制repetition來得有趣。不過以fluency來說則是光是repetition control就有接近最好的表現。</p>
-<p>有趣的是雖然engagingness、avoiding repetition、interestingness都有接近人的分數，人的inquisitiveness、fluency(XDDD)是比這幾個方式都低的(但是還是遠超過baseline)，而在making sense跟humanness方面則是與人還有很大的差距。不過作者最後結論有說到，平衡各方面的屬性是一個聊天機器人很重要的工作，也就是有好的conversational flow~，而且作者覺得不一定要"像人"才能產生有趣、深入的對話(從engagingness、interestingness都是接近人的分數來看)。總之，趕快control repetition吧XD！其他方面我是覺得這還是跟human evaluation問的問題有滿大的關係，如果可以多挑出一些"不像人"的原因會得到更多見解，從中也可以幫助我們設計更好的chatbot。</p>
+<p>有趣的是雖然engagingness、avoiding repetition、interestingness都有接近人的分數，人的inquisitiveness、fluency(XDDD)是比這幾個方式都低的(但是還是遠超過baseline)，而在making sense跟humanness方面則是與人還有很大的差距。不過作者最後結論有說到，平衡各方面的屬性是一個聊天機器人很重要的工作，也就是有好的conversational flow~，而且作者覺得不一定要"像人"才能產生有趣、深入的對話(從engagingness、interestingness都是接近人的分數來看)。總之，趕快control repetition吧XD！其他方面我是覺得這還是跟human 
+evaluation問的問題有滿大的關係，如果可以多挑出一些"不像人"的原因會得到更多見解，從中也可以幫助我們設計更好的chatbot。</p>
+<p>最近FAIR發了一篇blog大概說明了一些他們最近的研究，其實都滿有趣的，大家可以參考一波！
+* <a href="https://ai.facebook.com/blog/advances-in-conversational-ai/">https://ai.facebook.com/blog/advances-in-conversational-ai/</a></p>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var align = "center",
         indent = "0em",
