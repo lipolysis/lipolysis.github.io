@@ -163,8 +163,10 @@
 <p>最後作者的human evaluation是用了一個1-4分、8個問題的問卷(inquisitiveness是3分optimal、4分太多，而avoiding repetition只有1-3分)，結果發現engagingness方面，用conditional training的question control (i=7) 加上weighted decoding減少repetition得到3.1分的平均分數，遠遠超過baseline(~2.3分)，而當年ConvAI2比賽的冠軍可是用了GPT才達到這樣的效果(不過他們的test set不同)。其他的實驗顯示說specificity經過weighted decoding加上repetition control後，interestingness、listening跟humanness分數是比較高的。而作者也做了A/B testing發現大部分的時候(~84%)控制specificity加repetition都比單控制repetition來得有趣。不過以fluency來說則是光是repetition control就有接近最好的表現。</p>
 <p>有趣的是雖然engagingness、avoiding repetition、interestingness都有接近人的分數，人的inquisitiveness、fluency(XDDD)是比這幾個方式都低的(但是還是遠超過baseline)，而在making sense跟humanness方面則是與人還有很大的差距。不過作者最後結論有說到，平衡各方面的屬性是一個聊天機器人很重要的工作，也就是有好的conversational flow~，而且作者覺得不一定要"像人"才能產生有趣、深入的對話(從engagingness、interestingness都是接近人的分數來看)。總之，趕快control repetition吧XD！其他方面我是覺得這還是跟human 
 evaluation問的問題有滿大的關係，如果可以多挑出一些"不像人"的原因會得到更多見解，從中也可以幫助我們設計更好的chatbot。</p>
-<p>最近FAIR發了一篇blog大概說明了一些他們最近的研究，其實都滿有趣的，大家可以參考一波！
-* <a href="https://ai.facebook.com/blog/advances-in-conversational-ai/">https://ai.facebook.com/blog/advances-in-conversational-ai/</a></p>
+<p>最近FAIR發了一篇blog大概說明了一些他們最近的研究，其實都滿有趣的，大家可以參考一波！</p>
+<ul>
+<li><a href="https://ai.facebook.com/blog/advances-in-conversational-ai/">https://ai.facebook.com/blog/advances-in-conversational-ai/</a></li>
+</ul>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var align = "center",
         indent = "0em",
